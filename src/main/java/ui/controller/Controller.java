@@ -23,7 +23,7 @@ public class Controller extends HttpServlet {
     }
 
 
-    private void processRequest(HttpServletResponse request, HttpServletResponse response) throws ServletException, IOException{
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
     }
 }
