@@ -1,5 +1,5 @@
 package domain;
 
 public class User {
-    String name;
+    String userid,firstName, lastName, password;
 }
