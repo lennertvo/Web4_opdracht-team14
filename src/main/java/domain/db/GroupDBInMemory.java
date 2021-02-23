@@ -5,7 +5,7 @@ import domain.model.Group;
 import java.util.ArrayList;
 
 public class GroupDBInMemory {
-    ArrayList<Group> groups;
+    ArrayList<Group> groups = new ArrayList<>();
 
     public GroupDBInMemory() {
         groups.add(new Group("web 4"));
@@ -15,5 +15,9 @@ public class GroupDBInMemory {
 
     public ArrayList<Group> getGroups() {
         return groups;
+    }
+
+    public Group getGroup() {
+        return this.groups.get(0);
     }
 }

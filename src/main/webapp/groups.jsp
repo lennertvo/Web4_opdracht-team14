@@ -12,6 +12,8 @@
     <title>Groups</title>
 </head>
 <body>
-
+    <h1>Groups</h1>
+    <div id="groups"></div>
+<script type="text/javascript" src="js/groups.js"></script>
 </body>
 </html>

@@ -2,6 +2,8 @@ package ui.controller;
 
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.db.GroupDBInMemory;
 import domain.model.Group;
 
@@ -30,11 +32,18 @@ public class GroupServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Group> groups = groupDBInMemory.getGroups();
+        Group group = groupDBInMemory.getGroup();
+        response.setContentType("application/json");
+        response.getWriter().write(toJson(group));
     }
 
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
+    }
+
+    private String toJson(Group groups) throws JsonProcessingException {
+        ObjectMapper o = new ObjectMapper();
+        return o.writeValueAsString(groups);
     }
 }
