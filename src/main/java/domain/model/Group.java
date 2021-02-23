@@ -27,6 +27,6 @@ public class Group {
     }
 
     public void addUser(String userid){
-
+        //this.users.add(findUser(userid));
     }
 }
