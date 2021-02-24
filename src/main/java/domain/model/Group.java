@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 public class Group {
     private String name;
-    private ArrayList<User> users;
+    private ArrayList<String> users;
 
     public Group(String name) {
+        users = new ArrayList<>();
         setName(name);
     }
 
@@ -18,15 +19,15 @@ public class Group {
         this.name = name;
     }
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<String> getUsers() {
         return users;
     }
 
-    public void setUsers(ArrayList<User> users) {
+    public void setUsers(ArrayList<String> users) {
         this.users = users;
     }
 
-    public void addUser(String userid){
-        //this.users.add(findUser(userid));
+    public void addUser(String name){
+        this.users.add(name);
     }
 }

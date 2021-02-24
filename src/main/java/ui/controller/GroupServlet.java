@@ -32,9 +32,9 @@ public class GroupServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Group group = groupDBInMemory.getGroup();
+        ArrayList<Group> groups = groupDBInMemory.getGroups();
         response.setContentType("application/json");
-        response.getWriter().write(toJson(group));
+        response.getWriter().write(toJson(groups));
     }
 
 
@@ -42,7 +42,7 @@ public class GroupServlet extends HttpServlet {
 
     }
 
-    private String toJson(Group groups) throws JsonProcessingException {
+    private String toJson(ArrayList<Group> groups) throws JsonProcessingException {
         ObjectMapper o = new ObjectMapper();
         return o.writeValueAsString(groups);
     }

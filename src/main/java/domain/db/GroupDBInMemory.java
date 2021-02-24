@@ -1,7 +1,6 @@
 package domain.db;
 
 import domain.model.Group;
-import org.graalvm.compiler.core.common.GraalBailoutException;
 import java.util.Iterator;
 
 import java.util.ArrayList;
@@ -11,9 +10,18 @@ public class GroupDBInMemory {
 
     public GroupDBInMemory() {
         groups = new ArrayList<>();
-        groups.add(new Group("web 4"));
-        groups.add(new Group("2de jaar Informatica"));
-        groups.add(new Group("ISW"));
+        Group web4 = new Group("web 4");
+        groups.add(web4);
+        Group tweede = new Group("2de jaar Informatica");
+        groups.add(tweede);
+        Group isw = new Group("ISW");
+        groups.add(isw);
+        web4.addUser("Daan");
+        web4.addUser("Brick");
+        tweede.addUser("Ruben");
+        tweede.addUser("Lennert");
+        tweede.addUser("Eddy");
+        isw.addUser("Freddy");
     }
 
     public void addGroup(Group group) {
@@ -32,9 +40,5 @@ public class GroupDBInMemory {
 
     public ArrayList<Group> getGroups() {
         return groups;
-    }
-
-    public Group getGroup() {
-        return this.groups.get(0);
     }
 }

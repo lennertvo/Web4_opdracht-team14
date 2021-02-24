@@ -13,7 +13,15 @@
 </head>
 <body>
     <h1>Groups</h1>
-    <div id="groups"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Number of users</th>
+            </tr>
+        </thead>
+        <tbody id="groups"></tbody>
+    </table>
 <script type="text/javascript" src="js/groups.js"></script>
 </body>
 </html>

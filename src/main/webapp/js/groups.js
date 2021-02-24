@@ -9,12 +9,20 @@ function getGroups () {
 }
 
 function showGroups () {
-    if (x.readyState == 4) {
-        var group = JSON.parse(x.responseText);
-        var div = document.getElementById("groups")
-        var p = document.createElement('p');
-        var name = document.createTextNode(group.name);
-        p.appendChild(name);
-        div.appendChild(p);
+    if (x.readyState === 4) {
+        var groups = JSON.parse(x.responseText);
+        var tbody = document.getElementById("groups");
+        for (var i = 0; i < groups.length; i++) {
+            var tr = document.createElement('tr');
+            var td1 = document.createElement('td');
+            var td2 = document.createElement('td');
+            var name = document.createTextNode(groups[i].name);
+            var number = document.createTextNode(groups[i].users.length);
+            td1.appendChild(name);
+            td2.appendChild(number);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tbody.appendChild(tr);
+        }
     }
 }
