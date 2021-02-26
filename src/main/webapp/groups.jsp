@@ -16,9 +16,9 @@
     <jsp:include page="header.jsp">
         <jsp:param name="title" value="Groups"/>
     </jsp:include>
-    <table class="container-sm">
+    <table class="table table-striped">
         <thead>
-            <tr>
+            <tr class="bg-primary">
                 <th>Name</th>
                 <th>Number of users</th>
             </tr>

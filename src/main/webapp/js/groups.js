@@ -18,4 +18,6 @@ function showGroups (groups) {
         tr.appendChild(td2);
         tbody.appendChild(tr);
     }
+
+    //setTimeout(getGroups, 5000);
 }
