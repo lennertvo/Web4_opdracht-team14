@@ -10,10 +10,13 @@
 <html>
 <head>
     <title>Groups</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Groups</h1>
-    <table>
+    <jsp:include page="header.jsp">
+        <jsp:param name="title" value="Groups"/>
+    </jsp:include>
+    <table class="container-sm">
         <thead>
             <tr>
                 <th>Name</th>
