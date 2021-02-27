@@ -50,7 +50,4 @@ public class UserServlet extends HttpServlet {
     private String toJSON(User user) {
 
     }
-
-
-
 }

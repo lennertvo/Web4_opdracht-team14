@@ -27,7 +27,8 @@ public class GroupServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+        String groupName = request.getParameter("groupName");
+        groupDBInMemory.addGroup(new Group(groupName));
     }
 
     @Override
@@ -35,11 +36,6 @@ public class GroupServlet extends HttpServlet {
         ArrayList<Group> groups = groupDBInMemory.getGroups();
         response.setContentType("application/json");
         response.getWriter().write(toJson(groups));
-    }
-
-
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
     }
 
     private String toJson(ArrayList<Group> groups) throws JsonProcessingException {

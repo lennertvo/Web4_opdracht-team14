@@ -16,6 +16,7 @@
     <jsp:include page="header.jsp">
         <jsp:param name="title" value="Groups"/>
     </jsp:include>
+    <label for="newgroup">New group</label><input type="text" id="newgroup"><input type="button" id="newGroupButton" value="Add group">
     <table class="table table-striped">
         <thead>
             <tr class="bg-primary">
