@@ -2,14 +2,6 @@ window.onload = getUsers;
 
 
 
-
-
-function getUsers(){
-    newUsersRequest.open("GET", "UserServlet", true);
-    newUsersRequest.onreadystatechange = showUsers;
-    newUsersRequest.send();
-}
-
 let userButton = document.getElementById('newUserButton');
 userButton.onclick = addUser;
 
@@ -29,10 +21,10 @@ function  addUser() {
     let email = document.getElementById("email").value;
     let phonenumber = document.getElementById("phonenumber").value;
     let dateofbirth = document.getElementById("dateofbirth").value;
-    let information = "userid=" + encodeURIComponent(userid) + "&firstName=" + encodeURIComponent(firstname) +
-        "&lastName=" + encodeURIComponent(lastname) + "&password=" + encodeURIComponent(password) +
-        "&email=" + encodeURIComponent(email) + "&phoneNumber=" + encodeURIComponent(phonenumber) +
-        "&dateOfBirth=" + encodeURIComponent(dateofbirth);
+    let information = "userid=" + encodeURIComponent(userid) + "&firstname=" + encodeURIComponent(firstname) +
+        "&lastname=" + encodeURIComponent(lastname) + "&password=" + encodeURIComponent(password) +
+        "&email=" + encodeURIComponent(email) + "&phonenumber=" + encodeURIComponent(phonenumber) +
+        "&dateofBirth=" + encodeURIComponent(dateofbirth);
 
 
     newUsersRequest.open("POST", "UserServlet", true);
@@ -48,29 +40,33 @@ function  addUser() {
 
 
 
-function showUsers() {
-    if(newUsersRequest.readyState === 4) {
-        if (newUsersRequest.status === 200) {
-            let users = JSON.parse(newUsersRequest.responseText);
-            let tbody = document.getElementById("users")
+function getUsers(){
+    fetch("UserServlet?").then(r => r.json()).then(data => showUsers(data));
+}
 
-            let tr = tbody.childNodes[0];
+l
+
+
+function showUsers(users) {
+
+            var tbody = document.getElementById("users")
+
+            var tr = tbody.childNodes[0];
             if (tr == null) {
-                createTable();
+                createTable(users);
             } else {
                 removeAllChildNodes(tbody)
-                createTable()
+                createTable(users)
             }
 
 
-
-            function createTable() {
-                for (let i = 0; i < users.length; i++) {
-                    let tr1 = document.createElement('tr');
-                    let td1 = document.createElement('td');
-                    let td2 = document.createElement('td')
-                    let firstname = document.createElement(users[i].firstName);
-                    let lastname = document.createElement(users[i].lastName);
+            function createTable(users) {
+                for (var i = 0; i < users.length; i++) {
+                    var tr1 = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    var td2 = document.createElement('td')
+                    var firstname = document.createElement(users[i].firstName);
+                    var lastname = document.createElement(users[i].lastName);
                     td1.appendChild(firstname);
                     td2.appendChild(lastname)
                     tr1.appendChild(td1)
@@ -81,11 +77,9 @@ function showUsers() {
                 }
             }
 
-        }
-    }
-
-
-
-
 
 }
+
+
+
+

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 // This is an epic user
 public class User {
 
-    //dit gaat er los over
+
     @JsonIgnore
     private String userid;
     private String firstName, lastName;
@@ -16,6 +16,9 @@ public class User {
     @JsonIgnore
     private LocalDate dateOfBirth;
 
+    public User() {
+
+    }
     public User(String userid, String firstName, String lastName, String password, String email, String phoneNumber, LocalDate dateOfBirth){
         setUserid(userid);
         setFirstName(firstName);
