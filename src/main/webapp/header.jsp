@@ -11,6 +11,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="index.jsp">Users</a></li>
             <li class="nav-item"><a class="nav-link" href="groups.jsp">Groups</a></li>
+            <li class="nav-item"><a class="nav-link" href="groups2.jsp">Groups using fetch</a></li>
         </ul>
     </nav>
     <h1>${param.title}</h1>

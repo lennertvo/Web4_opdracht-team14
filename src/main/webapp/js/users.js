@@ -1,36 +1,45 @@
 window.onload = getUsers;
-
+let x = new XMLHttpRequest();
 function getUsers(){
-    fetch("UserServlet?").then(r => r.json()).then(data => showUsers(data));
+    //fetch("UserServlet?").then(r => r.json()).then(data => showUsers(data));
+    x.open("GET", "UserServlet", true);
+    x.onreadystatechange = showUsers ;
+    x.send();
 }
 
-function showUsers(users) {
+function showUsers() {
+    if (x.readyState === 4) {
+        if (x.status === 200) {
 
-    var tbody = document.getElementById("users")
+            let users = JSON.parse(x.responseText)
+            var tbody = document.getElementById("users")
 
-    var tr = tbody.childNodes[0];
-    if (tr == null) {
-        createTable(users);
-    } else {
-        removeAllChildNodes(tbody)
-        createTable(users)
-    }
+            var tr = tbody.childNodes[0];
+            if (tr == null) {
+                createTable(users);
+            } else {
+                removeAllChildNodes(tbody)
+                createTable(users)
+            }
 
-    function createTable(users) {
-        for (var i = 0; i < users.length; i++) {
-            var tr1 = document.createElement('tr');
-            var td1 = document.createElement('td');
-            var td2 = document.createElement('td')
-            var firstname = document.createTextNode(users[i].firstName);
-            var lastname = document.createTextNode(users[i].lastName);
-            td1.appendChild(firstname);
-            td2.appendChild(lastname)
-            tr1.appendChild(td1)
-            tr1.appendChild(td2)
-            tbody.appendChild(tr1);
+            function createTable(users) {
+                for (var i = 0; i < users.length; i++) {
+                    var tr1 = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    var td2 = document.createElement('td')
+                    var firstname = document.createTextNode(users[i].firstName);
+                    var lastname = document.createTextNode(users[i].lastName);
+                    td1.appendChild(firstname);
+                    td2.appendChild(lastname)
+                    tr1.appendChild(td1)
+                    tr1.appendChild(td2)
+                    tbody.appendChild(tr1);
+                }
+            }
         }
     }
 }
+
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -60,4 +69,5 @@ function  addUser() {
     newUsersRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     newUsersRequest.send(information);
     getUsers();
+
 }

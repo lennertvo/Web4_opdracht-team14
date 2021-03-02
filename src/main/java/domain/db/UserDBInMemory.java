@@ -22,15 +22,7 @@ public class UserDBInMemory {
         return users;
     }
 
-    /*public void removeUser(String userID) {
-        Iterator<User> it = users.iterator();
-        while(it.hasNext()) {
-            User user = it.next();
-            if (user.getUserid().equals(userID)) {
-                it.remove();
-            }
-        }
-    }*/
+
 
     public void removeUser(String userID) {
         users.removeIf(user -> user.getUserid().equals(userID));
