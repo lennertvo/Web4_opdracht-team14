@@ -11,7 +11,7 @@ function showGroups (groups) {
         createTable(groups);
     }
     else {
-        removeAllChildNodes(tbody)
+        removeAllChildNodes(tbody);
         createTable(groups);
     }
 
@@ -40,13 +40,13 @@ function removeAllChildNodes(parent) {
 let addButton = document.getElementById("newGroupButton");
 addButton.onclick = addGroup;
 
-let newGroupRequest = new XMLHttpRequest();
+let addGroupRequest = new XMLHttpRequest();
 
 function addGroup(){
     let groupName = document.getElementById("newgroup").value;
     let information = "groupName=" + encodeURIComponent(groupName);
-    newGroupRequest.open("POST", "GroupServlet", true);
-    newGroupRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    newGroupRequest.send(information);
+    addGroupRequest.open("POST", "GroupServlet", true);
+    addGroupRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    addGroupRequest.send(information);
     getGroups();
 }

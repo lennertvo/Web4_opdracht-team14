@@ -10,13 +10,12 @@ import java.util.Iterator;
 import java.util.List;
 
 public class UserDBInMemory {
-    private ArrayList<User> users;
+    ArrayList<User> users;
 
     public UserDBInMemory() {
         users = new ArrayList<>();
         users.add(new User("r0782485", "Lennert", "Van Oosterwyck", "123", "lennert@spookmail.com", "0412345678", LocalDate.of(2000, 4,20 )));
         users.add(new User("r0789520", "Ruben", "Bottu", "123", "ruben@spookmail.com", "0412345643", LocalDate.of(2000, 1, 30)));
-
     }
 
     public ArrayList<User> getUsers(){

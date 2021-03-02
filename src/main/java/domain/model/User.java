@@ -7,10 +7,9 @@ import java.time.LocalDate;
 // This is an epic user
 public class User {
 
-
+    private String firstName, lastName;
     @JsonIgnore
     private String userid;
-    private String firstName, lastName;
     @JsonIgnore
     private String password, email, phoneNumber;
     @JsonIgnore
