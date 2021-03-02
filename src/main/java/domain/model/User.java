@@ -1,12 +1,19 @@
 package domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 
 // This is an epic user
 public class User {
 
     //dit gaat er los over
-    private String userid,firstName, lastName, password, email, phoneNumber;
+    @JsonIgnore
+    private String userid;
+    private String firstName, lastName;
+    @JsonIgnore
+    private String password, email, phoneNumber;
+    @JsonIgnore
     private LocalDate dateOfBirth;
 
     public User(String userid, String firstName, String lastName, String password, String email, String phoneNumber, LocalDate dateOfBirth){

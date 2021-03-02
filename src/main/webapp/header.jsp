@@ -9,7 +9,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="UserServlet?">Users</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.jsp">Users</a></li>
             <li class="nav-item"><a class="nav-link" href="groups.jsp">Groups</a></li>
         </ul>
     </nav>

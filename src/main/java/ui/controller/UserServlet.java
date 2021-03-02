@@ -1,11 +1,12 @@
 package ui.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.sun.tools.sjavac.server.RequestHandler;
 import domain.db.UserDBInMemory;
 import domain.model.User;
-import sun.jvm.hotspot.runtime.ObjectMonitor;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
@@ -43,11 +45,18 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<User> users = userDBInMemory.getUsers();
+
+        response.setContentType("application/json");
+        response.getWriter().write(toJSON(users));
+
 
     }
 
 
-    private String toJSON(User user) {
+    private String toJSON(ArrayList<User> users) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(users);
 
     }
 }
