@@ -17,12 +17,22 @@ public class GroupDBInMemory {
         groups.add(tweede);
         Group isw = new Group("ISW");
         groups.add(isw);
+        Group UCLL = new Group("UCLL");
+        groups.add(UCLL);
         web4.addUser("Daan");
         web4.addUser("Brick");
         tweede.addUser("Ruben");
         tweede.addUser("Lennert");
         tweede.addUser("Eddy");
         isw.addUser("Freddy");
+        UCLL.addUser("Lol");
+        UCLL.addUser("Lol");
+        UCLL.addUser("Lol");
+        UCLL.addUser("Lol");
+        UCLL.addUser("Lol");
+        UCLL.addUser("Lol");
+        UCLL.addUser("Lol");
+        UCLL.addUser("Lol");
     }
 
     public void addGroup(Group group) {

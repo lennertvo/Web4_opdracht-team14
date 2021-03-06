@@ -15,8 +15,8 @@
 <table class="table table-striped">
     <thead>
     <tr class="bg-primary">
-        <th>Name</th>
-        <th>Number of users</th>
+        <th onclick="sortColumn('name')">Name</th>
+        <th onclick="sortColumn('users')">Number of users</th>
     </tr>
     </thead>
     <tbody id="groups2"></tbody>

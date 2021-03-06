@@ -3,9 +3,7 @@ window.onload = getGroups;
 
 function getGroups() {
     fetch("GroupServlet?").then(r => r.json()).then(data => showGroups(data));
-
 }
-
 
 function showGroups(groups) {
 
@@ -46,12 +44,9 @@ let addButton = document.getElementById("newGroupButton2");
 addButton.onclick = addGroup;
 
 
-
-
 function addGroup() {
     let groupName = document.getElementById("newgroup2").value;
     let information = "groupName=" + encodeURIComponent(groupName);
-
 
     fetch("GroupServlet?", {
         method: "POST",
@@ -59,11 +54,46 @@ function addGroup() {
         body: information})
 
     getGroups()
+}
 
 
+// individuele functionaliteit van Daan Stallaert
+let sortDirection = true;
+
+function sortColumn(columnName){
+    sortDirection = !sortDirection;
+
+    if(columnName === "users"){
+        fetch("GroupServlet?").then(r => r.json()).then(data => sortNumberColumn(sortDirection, data));
+    }
+    else if(columnName === "name"){
+        fetch("GroupServlet?").then(r => r.json()).then(data => sortNameColumn(sortDirection, data));
+    }
+}
+
+function sortNumberColumn(sort, data){
+    let sortedData = data.sort((g1, g2) => {
+        return sort ? g1.users.length - g2.users.length : g2.users.length - g1.users.length
+    });
+    showGroups(sortedData);
+}
 
 
+function sortNameColumn(sort, data){
+    let sortedData = data.sort((g1, g2) => {
+        return sort ? compareString(g1.name.toLowerCase(), g2.name.toLowerCase()) : compareString(g2.name.toLowerCase(), g1.name.toLowerCase())
+    });
 
+    function compareString(a, b){
+        if (a > b) {
+            return 1;
+        }
+        if (b > a) {
+            return -1;
+        }
+        return 0;
+    }
+    showGroups(sortedData);
 }
 
 

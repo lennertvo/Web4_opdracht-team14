@@ -1,0 +1,49 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: daans
+  Date: 6/03/2021
+  Time: 11:13
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Users</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<jsp:include page="header.jsp">
+    <jsp:param name="title" value="Users"/>
+</jsp:include>
+
+<form><label for="userid">User ID</label>
+    <input type="text" id="userid"/>
+    <label for="firstname">First Name</label>
+    <input type="text" id="firstname"/>
+    <label for="lastname">Last Name</label>
+    <input type="text" id="lastname"/>
+    <label for="password">Password</label>
+    <input type="password" id="password"/>
+    <label for="email">Email</label>
+    <input type="email" id="email"/>
+    <label for="phonenumber">Phone Number</label>
+    <input type="tel" id="phonenumber"/>
+    <label for="dateofbirth">Date Of Birth</label>
+    <input type="date" id="dateofbirth" name="dateofbirth"/>
+    <input type="button" id="newUserButton" value="Add user"/>
+</form>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr class="bg-primary">
+        <th>Firstname </th>
+        <th>Lastname</th>
+    </tr>
+    </thead>
+    <tbody id="users"></tbody>
+</table>
+
+<script type="text/javascript" src="js/users2.js"></script>
+</body>
+</html>

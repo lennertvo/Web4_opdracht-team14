@@ -1,32 +1,42 @@
 window.onload = getGroups;
 
+let x = new XMLHttpRequest();
+
 function getGroups () {
-    fetch("GroupServlet?").then(r => r.json()).then(data => showGroups(data));
+    x.open("GET", "GroupServlet", true);
+    x.onreadystatechange = showGroups;
+    x.send();
 }
 
-function showGroups (groups) {
-    var tbody = document.getElementById("groups");
-    var tr = tbody.childNodes[0];
-    if(tr == null) {
-        createTable(groups);
-    }
-    else {
-        removeAllChildNodes(tbody);
-        createTable(groups);
-    }
+function showGroups() {
+    if (x.readyState === 4) {
+        if (x.status === 200) {
+            let groups = JSON.parse(x.responseText)
 
-    function createTable(groups){
-        for (var i = 0; i < groups.length; i++) {
-            var tr = document.createElement('tr');
-            var td1 = document.createElement('td');
-            var td2 = document.createElement('td');
-            var name = document.createTextNode(groups[i].name);
-            var number = document.createTextNode(groups[i].users.length);
-            td1.appendChild(name);
-            td2.appendChild(number);
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-            tbody.appendChild(tr);
+            var tbody = document.getElementById("groups");
+
+            var tr = tbody.childNodes[0];
+            if (tr == null) {
+                createTable(groups);
+            } else {
+                removeAllChildNodes(tbody);
+                createTable(groups);
+            }
+
+            function createTable(groups) {
+                for (var i = 0; i < groups.length; i++) {
+                    var tr = document.createElement('tr');
+                    var td1 = document.createElement('td');
+                    var td2 = document.createElement('td');
+                    var name = document.createTextNode(groups[i].name);
+                    var number = document.createTextNode(groups[i].users.length);
+                    td1.appendChild(name);
+                    td2.appendChild(number);
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tbody.appendChild(tr);
+                }
+            }
         }
     }
 }
