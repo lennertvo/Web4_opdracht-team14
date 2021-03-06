@@ -11,7 +11,7 @@
     <jsp:param name="title" value="Groups using fetch"/>
 </jsp:include>
 <label for="newgroup2">New group</label><input type="text" id="newgroup2"><input type="button" id="newGroupButton2" value="Add group">
-
+<input type="text" id="search" placeholder="Search...">
 <table class="table table-striped">
     <thead>
     <tr class="bg-primary">
