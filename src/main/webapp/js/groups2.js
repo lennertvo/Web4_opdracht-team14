@@ -21,13 +21,16 @@ function showGroups(groups) {
         for (var i = 0; i < groups.length; i++) {
             var tr1 = document.createElement('tr');
             var td1 = document.createElement('td');
-            var td2 = document.createElement('td')
+            var td2 = document.createElement('td');
             var name = document.createTextNode(groups[i].name);
             var numberOfUsers = document.createTextNode(groups[i].users.length);
+            var deleteButton = document.createElement('BUTTON');
+            deleteButton.innerHTML = "Delete";
             td1.appendChild(name);
             td2.appendChild(numberOfUsers)
             tr1.appendChild(td1)
             tr1.appendChild(td2)
+            tr1.appendChild(deleteButton)
             tbody.appendChild(tr1);
         }
     }
