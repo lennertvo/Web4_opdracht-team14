@@ -23,6 +23,7 @@ function showGroups(groups) {
             var td1 = document.createElement('td');
             var td2 = document.createElement('td');
             var name = document.createTextNode(groups[i].name);
+            console.log(groups[i].users.length)
             var numberOfUsers = document.createTextNode(groups[i].users.length);
             var deleteButton = document.createElement('BUTTON');
             deleteButton.innerHTML = "Delete";
@@ -40,7 +41,6 @@ function showGroups(groups) {
             parent.removeChild(parent.firstChild);
         }
     }
-
 }
 
 let addButton = document.getElementById("newGroupButton2");
@@ -97,6 +97,29 @@ function sortNameColumn(sort, data){
         return 0;
     }
     showGroups(sortedData);
+}
+
+
+// individuele opdracht Brick van Roekel
+
+let searchButton = document.getElementById("searchGroupButton2");
+searchButton.onclick = searchGroup;
+
+function searchGroup(){
+    let searchValue = document.getElementById("search2").value;
+    if(searchValue === ""){
+        getGroups();
+    }else {
+        fetch("GroupServlet?").then(r => r.json()).then(data => executeSearchGroup(data, searchValue));
+    }
+}
+function executeSearchGroup(groups,groupname){
+    for(let i=0; i!==groups.length; i++){
+        if(groups[i].name === groupname){
+            let searchedGroup = [groups[i]]
+            showGroups(searchedGroup);
+        }
+    }
 }
 
 

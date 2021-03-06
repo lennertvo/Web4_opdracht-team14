@@ -60,3 +60,22 @@ function addGroup(){
     addGroupRequest.send(information);
     getGroups();
 }
+
+
+/* individuele opdracht Brick van Roekel --> gemaakt met fetch, zie groups2.js
+
+let searchButton = document.getElementById("searchGroupButton");
+searchButton.onclick = searchGroup;
+
+function searchGroup(){
+    let searchValue = document.getElementById("search").value;
+    var groups = JSON.parse(x.responseText)
+
+    for(let i=0; i!==groups.length; i++){
+        if(groups[i].name === searchValue){
+
+        }
+    }
+
+}*/
+

@@ -10,7 +10,8 @@
         <jsp:param name="title" value="Groups"/>
     </jsp:include>
     <label for="newgroup">New group</label><input type="text" id="newgroup"><input type="button" id="newGroupButton" value="Add group">
-    <input type="text" id="search" placeholder="Search...">
+    <br>
+    <input type="text" id="search" placeholder="Search..."><input type="button"id="searchGroup" value="Search group">
     <table class="table table-striped">
         <thead>
             <tr class="bg-primary">
