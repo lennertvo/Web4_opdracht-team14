@@ -53,6 +53,13 @@ public class GroupServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().write(toJson(groups));
                 break;
+            case ("sortColumn"):
+                String columnName = request.getParameter("columnName");
+                String sortDirection = request.getParameter("sortDirection");
+                ArrayList<Group> sortedGroups = groupDBInMemory.sortedGroups(columnName, sortDirection);
+                response.setContentType("application/json");
+                response.getWriter().write(toJson(sortedGroups));
+                break;
         }
 
     }

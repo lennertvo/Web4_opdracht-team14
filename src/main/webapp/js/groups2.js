@@ -62,7 +62,7 @@ function addGroup() {
 
 
 
-// individuele functionaliteit van Daan Stallaert
+// individuele functionaliteit met fetch van Daan Stallaert
 let sortDirection = true;
 
 function sortColumn(columnName){
