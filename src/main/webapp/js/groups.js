@@ -65,6 +65,18 @@ function addGroup(){
 }
 
 
+// individuele functionaliteit van Daan Stallaert
+let sortDirection = true;
+
+function sortColumn(columnName){
+    sortDirection = !sortDirection;
+
+    x.open("Get", "GroupServlet?command=sortColumn&columnName=" + columnName.toString() + "&sortDirection=" + sortDirection.toString(), true)
+    x.onreadystatechange = showGroups
+    x.send()
+}
+
+
 // individuele opdracht Lennert Van Oosterwyck
 let filterButton = document.getElementById("filterByMax")
 filterButton.onclick = filterByMax;
