@@ -46,12 +46,87 @@ public class UserServlet extends HttpServlet {
         userDBInMemory.addUser(user);
     }
 
-    @Override
+    /*@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<User> users = userDBInMemory.getUsers();
         response.setContentType("application/json");
         response.getWriter().write(toJSON(users));
+    }*/
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String command = request.getParameter("command");
+        if (command != null && command.equals("searchUser")) {
+            String firstName = request.getParameter("firstName");
+            ArrayList<User> users = userDBInMemory.findUser(firstName);
+            response.setContentType("application/json");
+            response.getWriter().write(toJSON(users));
+        }
+        else {
+            ArrayList<User> users = userDBInMemory.getUsers();
+            response.setContentType("application/json");
+            response.getWriter().write(toJSON(users));
+        }
     }
+
+    /*@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String command = request.getParameter("command");
+        if (command == null) {
+            ArrayList<User> users = userDBInMemory.getUsers();
+            response.setContentType("application/json");
+            response.getWriter().write(toJSON(users));
+        }
+        switch (command) {
+            case "searchUser":
+                String firstName = request.getParameter("firstName");
+                ArrayList<User> users = userDBInMemory.findUser(firstName);
+                response.setContentType("application/json");
+                response.getWriter().write(toJSON(users));
+                break;
+        }
+    }*/
+
+    /*String command = request.getParameter("command");
+        switch (command){
+            case("filterByMaxNumberOfPlayers"):
+                String m = request.getParameter("max");
+                int max = Integer.parseInt(m);
+                ArrayList<Group> filteredGroups = groupDBInMemory.getGroupsWithMaxUsers(max);
+                response.setContentType("application/json");
+                response.getWriter().write(toJson(filteredGroups));
+                break;
+            case("searchGroup"):
+                String searchedGroup = request.getParameter("searchedGroup");
+                ArrayList<Group> group = groupDBInMemory.searchGroup(searchedGroup);
+                response.setContentType("application/json");
+                response.getWriter().write(toJson(group));
+                break;
+            case ("all"):
+                ArrayList<Group> groups = groupDBInMemory.getGroups();
+                response.setContentType("application/json");
+                response.getWriter().write(toJson(groups));
+                break;
+        }*/
+
+    /*private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String destination = "";
+        String action = "home";
+
+        if (request.getParameter("command") != null) action = request.getParameter("command");
+
+        switch (action) {
+            case "overzicht":
+                destination = overzicht(request, response);
+                break;
+            case "formulier":
+                destination = formulier(request, response);
+                break;
+            default:
+                destination = home(request, response);
+        }
+        request.getRequestDispatcher(destination).forward(request, response);
+    }*/
 
 
     private String toJSON(ArrayList<User> users) throws JsonProcessingException {

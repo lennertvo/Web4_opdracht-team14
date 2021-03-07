@@ -71,3 +71,22 @@ function  addUser() {
     getUsers();
 
 }
+
+// Deelopdracht 1a individueel - Ruben Bottu r0789520 - gebruiker zoeken op voornaam
+let searchUserButton = document.getElementById("searchUserButton");
+searchUserButton.onclick = searchUser;
+
+function searchUser(){
+    let firstName = document.getElementById("firstNameText").value;
+    x.open("GET", "UserServlet?command=searchUser&firstName=" + encodeURIComponent(firstName), true);
+    x.onreadystatechange = showUsers;
+    x.send();
+    // showUsers() ???
+}
+/*
+function searchUser(){
+    let firstName = document.getElementById("firstNameText").value;
+    x.open("GET", "UserServlet?command=searchUser&firstName=" + encodeURIComponent(firstName), true);
+    x.send();
+    showUsers();
+}*/
