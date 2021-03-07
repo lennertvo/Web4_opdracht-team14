@@ -83,10 +83,3 @@ function searchUser(){
     x.send();
     // showUsers() ???
 }
-/*
-function searchUser(){
-    let firstName = document.getElementById("firstNameText").value;
-    x.open("GET", "UserServlet?command=searchUser&firstName=" + encodeURIComponent(firstName), true);
-    x.send();
-    showUsers();
-}*/
