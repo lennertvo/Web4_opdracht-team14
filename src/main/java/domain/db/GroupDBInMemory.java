@@ -52,4 +52,17 @@ public class GroupDBInMemory {
     public ArrayList<Group> getGroups() {
         return groups;
     }
+
+    public ArrayList<Group> getGroupsWithMaxUsers(int max) {
+        ArrayList<Group> groupWithMax = new ArrayList<>();
+        for(Group g: groups) {
+            if(g.getUsers().size() <= max) {
+                groupWithMax.add(g);
+            }
+        }
+        return groupWithMax;
+    }
+
 }
+
+

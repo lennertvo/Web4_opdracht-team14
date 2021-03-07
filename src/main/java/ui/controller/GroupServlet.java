@@ -33,10 +33,28 @@ public class GroupServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Group> groups = groupDBInMemory.getGroups();
-        response.setContentType("application/json");
-        response.getWriter().write(toJson(groups));
-    }
+        String command = request.getParameter("command");
+        switch (command){
+            case("filterByMaxNumberOfPlayers"):
+                String m = request.getParameter("max");
+                int max = Integer.parseInt(m);
+                ArrayList<Group> filteredGroups = groupDBInMemory.getGroupsWithMaxUsers(max);
+                response.setContentType("application/json");
+                System.out.println("yes");
+                response.getWriter().write(toJson(filteredGroups));
+                break;
+            case ("all"):
+                ArrayList<Group> groups = groupDBInMemory.getGroups();
+                response.setContentType("application/json");
+                System.out.println("dit gebeurt!!!!");
+                response.getWriter().write(toJson(groups));
+                break;
+
+        }
+
+        }
+
+
 
     private String toJson(ArrayList<Group> groups) throws JsonProcessingException {
         ObjectMapper o = new ObjectMapper();

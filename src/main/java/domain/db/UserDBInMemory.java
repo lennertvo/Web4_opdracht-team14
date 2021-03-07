@@ -23,7 +23,6 @@ public class UserDBInMemory {
     }
 
 
-
     public void removeUser(String userID) {
         users.removeIf(user -> user.getUserid().equals(userID));
     }

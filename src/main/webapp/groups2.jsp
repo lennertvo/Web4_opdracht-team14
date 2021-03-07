@@ -13,6 +13,7 @@
 <label for="newgroup2">New group</label><input type="text" id="newgroup2"><input type="button" id="newGroupButton2" value="Add group">
 <br>
 <input type="text" id="search2" placeholder="Search..."><input type="button"id="searchGroupButton2" value="Search group">
+<br>
 <table class="table table-striped">
     <thead>
     <tr class="bg-primary">

@@ -2,7 +2,7 @@ window.onload = getGroups;
 
 
 function getGroups() {
-    fetch("GroupServlet?").then(r => r.json()).then(data => showGroups(data));
+    fetch("GroupServlet?command=all").then(r => r.json()).then(data => showGroups(data));
 }
 
 function showGroups(groups) {
@@ -60,6 +60,8 @@ function addGroup() {
 }
 
 
+
+
 // individuele functionaliteit van Daan Stallaert
 let sortDirection = true;
 
@@ -67,10 +69,10 @@ function sortColumn(columnName){
     sortDirection = !sortDirection;
 
     if(columnName === "users"){
-        fetch("GroupServlet?").then(r => r.json()).then(data => sortNumberColumn(sortDirection, data));
+        fetch("GroupServlet?command=all").then(r => r.json()).then(data => sortNumberColumn(sortDirection, data));
     }
     else if(columnName === "name"){
-        fetch("GroupServlet?").then(r => r.json()).then(data => sortNameColumn(sortDirection, data));
+        fetch("GroupServlet?command=all").then(r => r.json()).then(data => sortNameColumn(sortDirection, data));
     }
 }
 
@@ -110,7 +112,7 @@ function searchGroup(){
     if(searchValue === ""){
         getGroups();
     }else {
-        fetch("GroupServlet?").then(r => r.json()).then(data => executeSearchGroup(data, searchValue));
+        fetch("GroupServlet?command=all").then(r => r.json()).then(data => executeSearchGroup(data, searchValue));
     }
 }
 function executeSearchGroup(groups,groupname){
@@ -121,6 +123,9 @@ function executeSearchGroup(groups,groupname){
         }
     }
 }
+
+
+
 
 
 
