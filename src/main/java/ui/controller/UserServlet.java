@@ -46,13 +46,29 @@ public class UserServlet extends HttpServlet {
         userDBInMemory.addUser(user);
     }
 
-    @Override
+    /*@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<User> users = userDBInMemory.getUsers();
         response.setContentType("application/json");
         response.getWriter().write(toJSON(users));
-    }
+    }*/
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Deelopdracht 1a individueel - Ruben Bottu r0789520 - gebruiker zoeken op voornaam
+        String command = request.getParameter("command");
+        if (command != null && command.equals("searchUser")) {
+            String firstName = request.getParameter("firstName");
+            ArrayList<User> users = userDBInMemory.findUser(firstName);
+            response.setContentType("application/json");
+            response.getWriter().write(toJSON(users));
+        }
+        else {
+            ArrayList<User> users = userDBInMemory.getUsers();
+            response.setContentType("application/json");
+            response.getWriter().write(toJSON(users));
+        }
+    }
 
     private String toJSON(ArrayList<User> users) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
