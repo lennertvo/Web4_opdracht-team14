@@ -77,10 +77,6 @@ function filterByMax() {
 }
 
 
-
-
-
-
 // individuele opdracht Brick van Roekel
 
 let searchButton = document.getElementById("searchGroupButton");
