@@ -23,7 +23,7 @@ function postComment(){
     var name = document.getElementById("name").value
     var comment = document.getElementById("comment").value
     var topic = document.getElementById("topic").value
-    
+
 
     ws.send(name+","+comment+","+topic);
 }
