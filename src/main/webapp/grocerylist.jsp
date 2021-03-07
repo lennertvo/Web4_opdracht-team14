@@ -2,20 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Blog</title>
+    <title>Grocery list</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <jsp:include page="header.jsp">
-    <jsp:param name="title" value="Blog"/>
+    <jsp:param name="title" value="Grocery list"/>
 </jsp:include>
 
 
 <label for="familyMember">Family member</label><input type="text" id="familyMember">
-<label for="grocery">Item</label><input type="text" id="grocery">
+<label for="item">Item</label><input type="text" id="item">
 <label for="amount">Amount</label><input type="text" id="amount">
-<label for="addGroceryButton">Add grocery</label><input type="button" id="addGroceryButton">
-
+<input type="button" id="addGroceryButton" value="Add grocery">
+<div id="messages"></div>
 <table class="table table-striped">
     <thead>
     <tr class="bg-primary">
@@ -24,7 +24,7 @@
         <th>Amount</th>
     </tr>
     </thead>
-    <tbody id="groups"></tbody>
+    <tbody id="groceryList"></tbody>
 </table>
 <script type="text/javascript" src="js/grocerylist.js"></script>
 </body>
