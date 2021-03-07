@@ -35,7 +35,7 @@
     <option value="feelings">Hoe voel je je?</option>
 </select>
 
-<label for="addComment">Add Comment</label><input type="button" id="addComment">
+<label for="addComment"></label><input type="button" id="addComment" value="Add comment">
 
 
 <script type="text/javascript" src="js/blog.js"></script>

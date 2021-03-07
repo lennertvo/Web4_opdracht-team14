@@ -10,8 +10,12 @@
     <jsp:param name="title" value="Grocery list"/>
 </jsp:include>
 
-
-<label for="familyMember">Family member</label><input type="text" id="familyMember">
+<label for="familyMember">Family member</label><select id="familyMember" name="familyMember">
+    <option value="Daan">Daan</option>
+    <option value="Brick">Brick</option>
+    <option value="Lennert">Lennert</option>
+    <option value="Ruben">Ruben</option>
+</select>
 <label for="item">Item</label><input type="text" id="item">
 <label for="amount">Amount</label><input type="text" id="amount">
 <input type="button" id="addGroceryButton" value="Add grocery">

@@ -1,6 +1,9 @@
 var ws;
 window.onload = openSocket
 
+let addButton = document.getElementById("addGroceryButton");
+addButton.onclick = addGroceryList;
+
 function openSocket() {
     ws = new WebSocket("ws://localhost:8080/groceries")
 
@@ -11,11 +14,12 @@ function openSocket() {
 
 function writeResponse(text){
     var parts = text.split(" ");
-    document.getElementById("groceryList").innerHTML += "<tr><td>" + parts[0] + "</td><td>" + parts[1] + "</td><td>" + parts[2] + "</td></tr>";
+    var familyMember = parts[0]
+    var item = parts[1]
+    var amount = parts[2]
+    document.getElementById("groceryList").innerHTML += "<tr id='" + familyMember + "'></tr>"
+    document.getElementById(familyMember).innerHTML += "<td>" + familyMember + "</td><td>" + item + "</td><td>" + amount + "</td>";
 }
-
-let addButton = document.getElementById("addGroceryButton");
-addButton.onclick = addGroceryList;
 
 function addGroceryList(){
     var familyMember = document.getElementById("familyMember").value;
