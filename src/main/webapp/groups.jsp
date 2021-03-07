@@ -14,6 +14,8 @@
     <input type="text" id="search" placeholder="Search..."><input type="button"id="searchGroup" value="Search group">
     <input type="number" id="filterByMaxNumberOfPlayers" placeholder="Filter"><input type="button" id="filterByMax" value="Filter by max number of players">
 
+
+
     <table class="table table-striped">
         <thead>
             <tr class="bg-primary">

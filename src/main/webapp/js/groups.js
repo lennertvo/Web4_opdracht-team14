@@ -61,60 +61,20 @@ function addGroup(){
     getGroups();
 }
 
+
 // individuele opdracht Lennert Van Oosterwyck
 let filterButton = document.getElementById("filterByMax")
 filterButton.onclick = filterByMax;
-let a = new XMLHttpRequest()
+
 function filterByMax() {
     let filterNumber = document.getElementById("filterByMaxNumberOfPlayers").value;
-    a.open("Get", "GroupServlet?command=filterByMaxNumberOfPlayers&max=" + filterNumber.toString(), true)
-    a.onreadystatechange = showFilteredGroups
-    a.send()
+    x.open("Get", "GroupServlet?command=filterByMaxNumberOfPlayers&max=" + filterNumber.toString(), true)
+    x.onreadystatechange = showGroups
+    x.send()
 }
 
-function groupsWithMax(groups, max) {
-    let result = [];
-    for(let g of groups){
-        if(g.users.length <= max){
-            result.push(g)
-        }
-    }
-    showGroups(result);
-}
 
-function showFilteredGroups() {
-    if (x.readyState === 4) {
-        if (x.status === 200) {
-            let groups = JSON.parse(x.responseText)
 
-            var tbody = document.getElementById("groups");
-
-            var tr = tbody.childNodes[0];
-            if (tr == null) {
-                createTable(groups);
-            } else {
-                removeAllChildNodes(tbody);
-                createTable(groups);
-            }
-
-            function createTable(groups) {
-                for (var i = 0; i < groups.length; i++) {
-                    var tr = document.createElement('tr');
-                    var td1 = document.createElement('td');
-                    var td2 = document.createElement('td');
-                    var name = document.createTextNode(groups[i].name);
-                    var number = document.createTextNode(groups[i].users.length);
-                    td1.appendChild(name);
-                    td2.appendChild(number);
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
-                    tbody.appendChild(tr);
-                }
-            }
-        }
-    }
-}
-//fetch("GroupServlet?" + filterNumber.toString()).then(r => r.json()).then(data => groupsWithMax(data, filterNumber));
 
 
 

@@ -40,13 +40,11 @@ public class GroupServlet extends HttpServlet {
                 int max = Integer.parseInt(m);
                 ArrayList<Group> filteredGroups = groupDBInMemory.getGroupsWithMaxUsers(max);
                 response.setContentType("application/json");
-                System.out.println("yes");
                 response.getWriter().write(toJson(filteredGroups));
                 break;
             case ("all"):
                 ArrayList<Group> groups = groupDBInMemory.getGroups();
                 response.setContentType("application/json");
-                System.out.println("dit gebeurt!!!!");
                 response.getWriter().write(toJson(groups));
                 break;
 

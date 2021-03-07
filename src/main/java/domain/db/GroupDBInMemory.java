@@ -53,6 +53,7 @@ public class GroupDBInMemory {
         return groups;
     }
 
+
     public ArrayList<Group> getGroupsWithMaxUsers(int max) {
         ArrayList<Group> groupWithMax = new ArrayList<>();
         for(Group g: groups) {
