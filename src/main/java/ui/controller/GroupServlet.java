@@ -43,18 +43,21 @@ public class GroupServlet extends HttpServlet {
                 System.out.println("yes");
                 response.getWriter().write(toJson(filteredGroups));
                 break;
+            case("searchGroup"):
+                String searchedGroup = request.getParameter("searchedGroup");
+                ArrayList<Group> group = groupDBInMemory.searchGroup(searchedGroup);
+                response.setContentType("application/json");
+                response.getWriter().write(toJson(group));
+                break;
             case ("all"):
                 ArrayList<Group> groups = groupDBInMemory.getGroups();
                 response.setContentType("application/json");
                 System.out.println("dit gebeurt!!!!");
                 response.getWriter().write(toJson(groups));
                 break;
-
         }
 
-        }
-
-
+    }
 
     private String toJson(ArrayList<Group> groups) throws JsonProcessingException {
         ObjectMapper o = new ObjectMapper();

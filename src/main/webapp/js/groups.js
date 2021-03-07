@@ -37,9 +37,12 @@ function showGroups() {
                     tbody.appendChild(tr);
                 }
             }
+
         }
     }
 }
+
+
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -118,22 +121,17 @@ function showFilteredGroups() {
 
 
 
-/* individuele opdracht Brick van Roekel --> gemaakt met fetch, zie groups2.js
+// individuele opdracht Brick van Roekel
 
 let searchButton = document.getElementById("searchGroupButton");
 searchButton.onclick = searchGroup;
 
 function searchGroup(){
-    let searchValue = document.getElementById("search").value;
-    var groups = JSON.parse(x.responseText)
-
-    for(let i=0; i!==groups.length; i++){
-        if(groups[i].name === searchValue){
-
-        }
-    }
-
-}*/
+    let searchedGroup = document.getElementById("search").value;
+    x.open("GET", "GroupServlet?command=searchGroup&searchedGroup="+searchedGroup, true);
+    x.onreadystatechange = showGroups;
+    x.send();
+}
 
 
 

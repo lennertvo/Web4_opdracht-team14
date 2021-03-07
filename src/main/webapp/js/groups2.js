@@ -102,7 +102,7 @@ function sortNameColumn(sort, data){
 }
 
 
-// individuele opdracht Brick van Roekel
+// individuele opdracht Brick van Roekel met fetch
 
 let searchButton = document.getElementById("searchGroupButton2");
 searchButton.onclick = searchGroup;

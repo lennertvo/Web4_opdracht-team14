@@ -63,6 +63,18 @@ public class GroupDBInMemory {
         return groupWithMax;
     }
 
+    public ArrayList<Group> searchGroup(String name){
+        ArrayList<Group> groups = getGroups();
+        ArrayList<Group> searchedGroup = new ArrayList<>();
+        if(name == null || name.trim().equalsIgnoreCase("")){
+            return getGroups();
+        }
+        for (Group group:groups) {
+            if(group.getName().equalsIgnoreCase(name)) {
+                searchedGroup.add(group);
+                return searchedGroup;
+            }
+        }
+        return null;
+    }
 }
-
-
