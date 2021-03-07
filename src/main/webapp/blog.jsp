@@ -9,25 +9,32 @@
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Blog"/>
 </jsp:include>
-<div class="blockquote" id="firstBlog">
-    <h2>First blog</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab optio, possimus. Asperiores culpa dicta, incidunt inventore minus quae quam saepe!</p>
+<div class="blockquote">
+    <section id="lesson">
+        <h2>Hoe was de les?</h2>
+    </section>
+    <section id="music">
+        <h2>Welke muziek luister je?</h2>
+    </section>
+    <section id="random">
+        <h2>Random?</h2>
+    </section>
+    <section id="feelings">
+        <h2>Hoe voel je je?</h2>
+    </section>
 </div>
-<div class="blockquote" id="secondBlog">
-    <h2>Second blog</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab optio, possimus. Asperiores culpa dicta, incidunt inventore minus quae quam saepe!</p>
-</div>
-<div class="blockquote" id="thirdBlog">
-    <h2>Third blog</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab optio, possimus. Asperiores culpa dicta, incidunt inventore minus quae quam saepe!</p>
-</div>
-<div class="blockquote" id="fourthBlog">
-    <h2>Fourth blog</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab optio, possimus. Asperiores culpa dicta, incidunt inventore minus quae quam saepe!</p>
-</div>
+
 <label for="name">Name</label><input type="text" id="name" >
+<br>
 <label for="Comment">Comment</label><input type="text" id="comment">
-<label for="topic">Topic</label><input type="text" id="topic">
+<br>
+<label for="topic">Topic</label><select id="topic" name="topic">
+    <option value="lesson">Hoe was de les?</option>
+    <option value="music">Welke muziek luister je?</option>
+    <option value="random">Random?</option>
+    <option value="feelings">Hoe voel je je?</option>
+</select>
+<br>
 <label for="addComment">Add Comment</label><input type="button" id="addComment">
 
 

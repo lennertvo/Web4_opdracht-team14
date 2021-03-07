@@ -21,9 +21,14 @@ public class BlogServer {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session ) throws IOException {
+    public void onMessage(String message, Session session ) {
         for(Session s: sessions) {
-            s.getBasicRemote().sendText(message);
+            try {
+                s.getBasicRemote().sendText(message);
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 }

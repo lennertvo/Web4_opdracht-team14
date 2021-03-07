@@ -1,15 +1,21 @@
-window.onload = openSocket
-var webSocket
-let postButton = document.getElementById("addComment")
-postButton.onclick = postComment
+var ws;
+window.onload = openSocket;
+let postButton = document.getElementById("addComment");
+postButton.onclick = postComment;
 
 function openSocket() {
-    webSocket = new WebSocket("ws://localhost:8080/comment")
+    ws = new WebSocket("ws://localhost:8080/comment")
 
-    webSocket.onopen
+    ws.onopen = function (event){
+        writeResponse("connection opened")
+    }
 
     ws.onmessage = function (event) {
         writeResponse(event.data);
+    }
+
+    ws.onclose = function(event){
+        writeResponse("connection closed")
     }
 
 }
@@ -17,10 +23,19 @@ function postComment(){
     var name = document.getElementById("name").value
     var comment = document.getElementById("comment").value
     var topic = document.getElementById("topic").value
-    var tekst = "name="+name+"&comment="+comment+"&topic=" + topic
-    webSocket.send(tekst)
+    
+
+    ws.send(name+","+comment+","+topic);
 }
 
 function writeResponse(text){
+    var parts = text.split(",")
+    var name = parts[0]
+    var comment = parts[1]
+    var topic = parts[2]
+    document.getElementById(topic).innerHTML += "<p>" + name + ": " + comment + "</p>"
+
+
+
 
 }

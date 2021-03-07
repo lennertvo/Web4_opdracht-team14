@@ -22,5 +22,6 @@ function addGroceryList(){
     var item = document.getElementById("item").value;
     var amount = document.getElementById("amount").value;
     var tekst = familyMember + " " + item + " " + amount;
+
     ws.send(tekst)
 }

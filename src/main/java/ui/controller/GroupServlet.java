@@ -1,7 +1,6 @@
 package ui.controller;
 
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.db.GroupDBInMemory;
@@ -20,7 +19,7 @@ public class GroupServlet extends HttpServlet {
 
     private GroupDBInMemory groupDBInMemory;
 
-    public GroupServlet(){
+    public GroupServlet() {
         super();
         groupDBInMemory = new GroupDBInMemory();
     }
@@ -34,15 +33,15 @@ public class GroupServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
-        switch (command){
-            case("filterByMaxNumberOfPlayers"):
+        switch (command) {
+            case ("filterByMaxNumberOfPlayers"):
                 String m = request.getParameter("max");
                 int max = Integer.parseInt(m);
                 ArrayList<Group> filteredGroups = groupDBInMemory.getGroupsWithMaxUsers(max);
                 response.setContentType("application/json");
                 response.getWriter().write(toJson(filteredGroups));
                 break;
-            case("searchGroup"):
+            case ("searchGroup"):
                 String searchedGroup = request.getParameter("searchedGroup");
                 ArrayList<Group> group = groupDBInMemory.searchGroup(searchedGroup);
                 response.setContentType("application/json");
