@@ -10,7 +10,8 @@ function openSocket() {
 }
 
 function writeResponse(text){
-    document.getElementById("messages").innerHTML += text + "<br/>"
+    var parts = text.split(" ");
+    document.getElementById("groceryList").innerHTML += "<tr><td>" + parts[0] + "</td><td>" + parts[1] + "</td><td>" + parts[2] + "</td></tr>";
 }
 
 let addButton = document.getElementById("addGroceryButton");
@@ -20,6 +21,6 @@ function addGroceryList(){
     var familyMember = document.getElementById("familyMember").value;
     var item = document.getElementById("item").value;
     var amount = document.getElementById("amount").value;
-    var tekst = "Family member: "+familyMember+", item: " + item+", amount: "+amount;
+    var tekst = familyMember + " " + item + " " + amount;
     ws.send(tekst)
 }
