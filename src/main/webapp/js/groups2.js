@@ -16,6 +16,7 @@ function showGroups(groups) {
         removeAllChildNodes(tbody)
         createTable(groups)
     }
+    setTimeout(getGroups,10000)
 
     function createTable(groups) {
         for (var i = 0; i < groups.length; i++) {
@@ -41,6 +42,7 @@ function showGroups(groups) {
             parent.removeChild(parent.firstChild);
         }
     }
+
 }
 
 let addButton = document.getElementById("newGroupButton2");
@@ -56,7 +58,7 @@ function addGroup() {
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
         body: information})
 
-    getGroups()
+
 }
 
 

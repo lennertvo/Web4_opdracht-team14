@@ -14,6 +14,7 @@ function showUsers(users) {
         removeAllChildNodes(tbody)
         createTable(users)
     }
+    setTimeout(getUsers,10000);
 
     function createTable(users) {
         for (var i = 0; i < users.length; i++) {
@@ -29,6 +30,7 @@ function showUsers(users) {
             tbody.appendChild(tr1);
         }
     }
+
 }
 
 
@@ -59,5 +61,4 @@ function  addUser() {
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
         body: information})
 
-    getUsers()
 }

@@ -25,17 +25,17 @@
 </div>
 
 <label for="name">Name</label><input type="text" id="name" >
-<br>
+
 <label for="Comment">Comment</label><input type="text" id="comment">
-<br>
+
 <label for="topic">Topic</label><select id="topic" name="topic">
     <option value="lesson">Hoe was de les?</option>
     <option value="music">Welke muziek luister je?</option>
     <option value="random">Random?</option>
     <option value="feelings">Hoe voel je je?</option>
 </select>
-<br>
-<label for="addComment">Add Comment</label><input type="button" id="addComment">
+
+<label for="addComment"></label><input type="button" id="addComment" value="Add comment">
 
 
 <script type="text/javascript" src="js/blog.js"></script>

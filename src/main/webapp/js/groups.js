@@ -23,6 +23,7 @@ function showGroups() {
                 createTable(groups);
             }
 
+
             function createTable(groups) {
                 for (var i = 0; i < groups.length; i++) {
                     var tr = document.createElement('tr');
@@ -37,9 +38,10 @@ function showGroups() {
                     tbody.appendChild(tr);
                 }
             }
-
         }
+        setTimeout(getGroups,10000);
     }
+
 }
 
 
@@ -61,7 +63,6 @@ function addGroup(){
     addGroupRequest.open("POST", "GroupServlet?", true);
     addGroupRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     addGroupRequest.send(information);
-    getGroups();
 }
 
 
