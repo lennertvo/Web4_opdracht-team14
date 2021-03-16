@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import domain.db.UserDBInMemory;
-import domain.model.Group;
 import domain.model.User;
 
 
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @WebServlet("/UserServlet")
@@ -59,7 +57,7 @@ public class UserServlet extends HttpServlet {
         String command = request.getParameter("command");
         if (command != null && command.equals("searchUser")) {
             String firstName = request.getParameter("firstName");
-            ArrayList<User> users = userDBInMemory.findUser(firstName);
+            ArrayList<User> users = userDBInMemory.findUsers(firstName);
             response.setContentType("application/json");
             response.getWriter().write(toJSON(users));
         }

@@ -24,7 +24,7 @@ public class UserDBInMemory {
 
 
     // Deelopdracht 1a individueel - Ruben Bottu r0789520 - gebruiker zoeken op voornaam
-    public ArrayList<User> findUser(String firstName) {
+    public ArrayList<User> findUsers(String firstName) {
         ArrayList<User> result = new ArrayList<>();
         for (User user : users) {
             if (user.getFirstName().equalsIgnoreCase(firstName)) {
@@ -32,6 +32,15 @@ public class UserDBInMemory {
             }
         }
         return result;
+    }
+
+    public User findUser(String userId){
+        for (User user : users) {
+            if (user.getUserid().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public void removeUser(String userID) {

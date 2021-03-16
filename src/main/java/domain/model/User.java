@@ -29,7 +29,7 @@ public class User {
         setUserid(userid);
         setFirstName(firstName);
         setLastName(lastName);
-        setPassword(password);
+        setPasswordHashed(password);
         setEmail(email);
         setPhoneNumber(phoneNumber);
         setDateOfBirth(dateOfBirth);

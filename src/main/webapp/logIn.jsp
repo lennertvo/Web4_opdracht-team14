@@ -9,9 +9,9 @@
     <jsp:param name="title" value="Log in "/>
 </jsp:include>
 
-<form method="post" action="">
-    <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-    <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+<form method="post" action="LogInServlet?command=logIn">
+    <input type="text" id="userId" class="fadeIn second" name="userId" placeholder="userId">
+    <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
     <input type="submit" class="fadeIn fourth" value="Log In">
 </form>
 
