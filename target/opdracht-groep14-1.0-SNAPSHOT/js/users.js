@@ -37,6 +37,7 @@ function showUsers() {
                 }
             }
         }
+        setTimeout(getUsers,10000);
     }
 }
 
@@ -68,7 +69,6 @@ function  addUser() {
     newUsersRequest.open("POST", "UserServlet", true);
     newUsersRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     newUsersRequest.send(information);
-    getUsers();
 
 }
 

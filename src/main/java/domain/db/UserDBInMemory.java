@@ -22,6 +22,7 @@ public class UserDBInMemory {
         return users;
     }
 
+
     // Deelopdracht 1a individueel - Ruben Bottu r0789520 - gebruiker zoeken op voornaam
     public ArrayList<User> findUser(String firstName) {
         ArrayList<User> result = new ArrayList<>();

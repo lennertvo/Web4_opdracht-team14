@@ -8,6 +8,8 @@
             <li class="nav-item"><a class="nav-link" href="groups2.jsp">Groups using fetch</a></li>
             <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="grocerylist.jsp">Grocery list</a></li>
+            <li class="nav-item"><a class="nav-link" href="logIn.jsp">Log in</a></li>
+
         </ul>
     </nav>
     <h1>${param.title}</h1>
