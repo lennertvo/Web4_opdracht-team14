@@ -39,11 +39,11 @@ public class LogInServlet extends HttpServlet {
             command = request.getParameter("command");
         }
         switch(command) {
-            case "index":
-                destination = index(request);
-                break;
             case "logIn":
                 destination = logIn(request);
+                break;
+            case "logOut":
+                destination = logOut(request);
                 break;
             default:
                 destination = index(request);
@@ -51,16 +51,18 @@ public class LogInServlet extends HttpServlet {
         request.getRequestDispatcher(destination).forward(request, response);
     }
 
+    private String logOut(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "logIn.jsp";
+    }
+
     private String logIn(HttpServletRequest request) {
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
 
         User found = userDBInMemory.findUser(userId);
-        System.out.println(found.getFirstName());
         if(found.isCorrectPassword(password)){
             createSession(found, request);
-            System.out.println("lol");
-            return "index.jsp";
         }
         return "logIn.jsp";
     }
