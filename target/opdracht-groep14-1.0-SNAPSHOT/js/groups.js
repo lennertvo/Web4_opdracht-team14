@@ -41,7 +41,6 @@ function showGroups() {
         }
         setTimeout(getGroups,10000);
     }
-
 }
 
 

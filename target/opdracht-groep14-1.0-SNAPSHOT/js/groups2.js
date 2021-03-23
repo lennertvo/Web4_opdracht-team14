@@ -57,8 +57,6 @@ function addGroup() {
         method: "POST",
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
         body: information})
-
-
 }
 
 

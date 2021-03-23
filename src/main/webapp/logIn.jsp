@@ -7,8 +7,9 @@
 </head>
 <body>
 <jsp:include page="header.jsp">
-    <jsp:param name="title" value="Log in "/>
+    <jsp:param name="title" value="Welcome to Spookbook"/>
 </jsp:include>
+<div class="m-3">
 <c:choose>
     <c:when test="${not empty user}">
         <h3>Welcome ${user.firstName}!</h3>
@@ -24,7 +25,7 @@
         </form>
     </c:otherwise>
 </c:choose>
-
+</div>
 
 <script type="text/javascript" src="js/users2.js"></script>
 </body>

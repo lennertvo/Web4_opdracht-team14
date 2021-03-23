@@ -9,7 +9,7 @@
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Grocery list"/>
 </jsp:include>
-
+<div class="m-3">
 <label for="familyMember">Family member</label><select id="familyMember" name="familyMember">
     <option value="Daan">Daan</option>
     <option value="Brick">Brick</option>
@@ -30,6 +30,7 @@
     </thead>
     <tbody id="groceryList"></tbody>
 </table>
+</div>
 <script type="text/javascript" src="js/grocerylist.js"></script>
 </body>
 </html>
