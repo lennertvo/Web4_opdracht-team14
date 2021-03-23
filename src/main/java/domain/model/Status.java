@@ -1,14 +1,14 @@
 package domain.model;
 
 public enum Status {
-    ONLINE         ("online"),
-    OFFLINE        ("offline"),
-    AWAY           ("away"),
-    BUSY           ("busy"),
+    ONLINE         ("Online"),
+    OFFLINE        ("Offline"),
+    AWAY           ("Away"),
+    BUSY           ("Busy"),
     TAKING_A_CLASS ("Taking a class");
 
-    private String description;
-    Status(String description) {
+    public String description;
+    private Status(String description) {
         this.description = description;
     }
 

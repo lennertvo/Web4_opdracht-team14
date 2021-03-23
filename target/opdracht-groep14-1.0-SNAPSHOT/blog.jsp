@@ -9,6 +9,7 @@
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Blog"/>
 </jsp:include>
+<div class="m-3">
 <div class="blockquote">
     <section id="lesson">
         <h2>Hoe was de les?</h2>
@@ -37,7 +38,7 @@
 
 <label for="addComment"></label><input type="button" id="addComment" value="Add comment">
 
-
+</div>
 <script type="text/javascript" src="js/blog.js"></script>
 </body>
 </html>

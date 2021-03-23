@@ -10,6 +10,7 @@
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Groups using fetch"/>
 </jsp:include>
+<div class="m-3">
 <label for="newgroup2">New group</label><input type="text" id="newgroup2"><input type="button" id="newGroupButton2" value="Add group">
 <br>
 <input type="text" id="search2" placeholder="Search..."><input type="button" id="searchGroupButton2" value="Search group">
@@ -24,6 +25,7 @@
     </thead>
     <tbody id="groups2"></tbody>
 </table>
+</div>
 <script type="text/javascript" src="js/groups2.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Users"/>
 </jsp:include>
-
+<div class="m-3">
 <form><label for="userid">User ID</label>
     <input type="text" id="userid"/>
     <label for="firstname">First Name</label>
@@ -36,7 +36,7 @@
     </thead>
     <tbody id="users"></tbody>
 </table>
-
+</div>
 <script type="text/javascript" src="js/users2.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
     <jsp:include page="header.jsp">
         <jsp:param name="title" value="Groups"/>
     </jsp:include>
+    <div class="m-3">
     <label for="newgroup">New group</label><input type="text" id="newgroup"><input type="button" id="newGroupButton" value="Add group">
     <br>
     <input type="text" id="search" placeholder="Search..."><input type="button" id="searchGroupButton" value="Search group">
@@ -25,6 +26,7 @@
         </thead>
         <tbody id="groups"></tbody>
     </table>
+    </div>
 <script type="text/javascript" src="js/groups.js"></script>
 </body>
 </html>

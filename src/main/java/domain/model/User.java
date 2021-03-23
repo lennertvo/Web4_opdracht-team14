@@ -34,6 +34,7 @@ public class User {
         setPhoneNumber(phoneNumber);
         setDateOfBirth(dateOfBirth);
         friends = new ArrayList<>();
+        setStatus(Status.OFFLINE);
     }
 
     public String getUserid() {

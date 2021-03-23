@@ -63,6 +63,7 @@ public class LogInServlet extends HttpServlet {
         User found = userDBInMemory.findUser(userId);
         if(found.isCorrectPassword(password)){
             createSession(found, request);
+            request.setAttribute("status", found.getStatus());
         }
         return "logIn.jsp";
     }
