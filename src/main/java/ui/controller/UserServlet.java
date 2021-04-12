@@ -18,6 +18,7 @@ import javax.websocket.Session;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
@@ -40,14 +41,34 @@ public class UserServlet extends HttpServlet {
                 System.out.println(status);
                 User u = (User) request.getSession().getAttribute("user");
                 System.out.println(u);
+                if(status.startsWith("T")){
+                    Status s = Status.TAKING_A_CLASS;
+                    u.setStatus(s);
 
-                Status s = Status.valueOf(status.toUpperCase().trim());
+                }
+                else{
+                    Status s = Status.valueOf(status.toUpperCase().trim());
+                    u.setStatus(s);
 
 
-                u.setStatus(s);
+                }
+
+
+
                 request.setAttribute("status", u.getStatus());
 
 
+
+                break;
+            case ("addFriend"):
+                System.out.println("hahahahahah");
+                String id = request.getParameter("userid");
+                User friend = userDBInMemory.findUser(id);
+                System.out.println("het geraakt hier");
+                User a = (User) request.getSession().getAttribute("user");
+                System.out.println(a);
+                a.addFriend(friend);
+                System.out.println(friend);
 
                 break;
             default:
@@ -80,22 +101,44 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Deelopdracht 1a individueel - Ruben Bottu r0789520 - gebruiker zoeken op voornaam
         String command = request.getParameter("command");
-        if (command != null && command.equals("searchUser")) {
-            String firstName = request.getParameter("firstName");
-            ArrayList<User> users = userDBInMemory.findUsers(firstName);
-            response.setContentType("application/json");
-            response.getWriter().write(toJSON(users));
-        }
-        else if (command != null && command.equals("getStatus")){
-            User u = (User) request.getSession().getAttribute("user");
-            Status status = u.getStatus();
-            response.setContentType("application/json");
-            response.getWriter().write(toJson(status));
-        }
-        else {
-            ArrayList<User> users = userDBInMemory.getUsers();
-            response.setContentType("application/json");
-            response.getWriter().write(toJSON(users));
+
+
+        switch (command){
+            case ("searchUser"):
+                String firstName = request.getParameter("firstName");
+                ArrayList<User> users = userDBInMemory.findUsers(firstName);
+                response.setContentType("application/json");
+                response.getWriter().write(toJSON(users));
+                break;
+            case ("getStatus"):
+                User u = (User) request.getSession().getAttribute("user");
+                Status status = u.getStatus();
+                String c = status.getDescription();
+                response.setContentType("application/json");
+                response.getWriter().write(toJson(c));
+                break;
+            case ("getFriends"):
+                User a = (User) request.getSession().getAttribute("user");
+                ArrayList<User> friends = a.getFriends();
+
+                response.setContentType("application/json");
+                response.getWriter().write(toJSON(friends));
+                break;
+
+
+            case("getPotentialFriends"):
+                User b = (User) request.getSession().getAttribute("user");
+                ArrayList<User> f = userDBInMemory.getPotentialFriends(b.getUserid());
+                response.setContentType("application/json");
+                System.out.println(f);
+                response.getWriter().write(toJSON(f));
+                break;
+            default:
+                ArrayList<User> us = userDBInMemory.getUsers();
+                response.setContentType("application/json");
+                response.getWriter().write(toJSON(us));
+
+
         }
     }
 
@@ -108,4 +151,15 @@ public class UserServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(status);
     }
+
+
+    private String toJson(String s) throws JsonProcessingException{
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(s);
+    }
+
+
+
+
+
 }

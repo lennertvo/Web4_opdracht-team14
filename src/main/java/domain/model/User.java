@@ -33,8 +33,10 @@ public class User {
         setEmail(email);
         setPhoneNumber(phoneNumber);
         setDateOfBirth(dateOfBirth);
-        friends = new ArrayList<>();
         setStatus(Status.OFFLINE);
+        friends = new ArrayList<>();
+
+
     }
 
     public String getUserid() {
@@ -137,6 +139,10 @@ public class User {
 
     public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
+    }
+
+    public void addFriend(User u ){
+        this.friends.add(u);
     }
 
     public Status getStatus() {

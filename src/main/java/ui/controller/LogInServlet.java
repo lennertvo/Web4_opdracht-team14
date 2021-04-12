@@ -1,6 +1,7 @@
 package ui.controller;
 
 import domain.db.UserDBInMemory;
+import domain.model.Status;
 import domain.model.User;
 
 import javax.servlet.ServletException;
@@ -52,6 +53,8 @@ public class LogInServlet extends HttpServlet {
     }
 
     private String logOut(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+        user.setStatus(Status.OFFLINE);
         request.getSession().invalidate();
         return "logIn.jsp";
     }
@@ -64,7 +67,10 @@ public class LogInServlet extends HttpServlet {
         if(found.isCorrectPassword(password)){
             createSession(found, request);
             request.setAttribute("status", found.getStatus());
+
         }
+        found.setStatus(Status.ONLINE);
+
         return "logIn.jsp";
     }
 

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-        <img src="/img/Logo.png" alt="Logo" class="rounded float-left" height="100">
+        <img src="${pageContext.request.contextPath}/img/Logo.png" alt="Logo" class="rounded float-left" height="100">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="logIn.jsp">Log in</a></li>
             <li class="nav-item"><a class="nav-link" href="index.jsp">Users</a></li>
