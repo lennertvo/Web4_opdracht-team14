@@ -3,6 +3,7 @@ package domain.db;
 import domain.db.sorters.NameSorter;
 import domain.db.sorters.NumberSorter;
 import domain.model.Group;
+import domain.model.User;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.Collections;
@@ -57,6 +58,9 @@ public class GroupDBInMemory {
         return groups;
     }
 
+    public void addUserToGroup(Group group, User user){
+        group.addUser(user.getFirstName());
+    }
 
     public ArrayList<Group> getGroupsWithMaxUsers(int max) {
         ArrayList<Group> groupWithMax = new ArrayList<>();

@@ -1,6 +1,5 @@
 window.onload = getGroups;
 
-
 function getGroups() {
     fetch("GroupServlet?command=all").then(r => r.json()).then(data => showGroups(data));
 }
@@ -24,15 +23,14 @@ function showGroups(groups) {
             var td1 = document.createElement('td');
             var td2 = document.createElement('td');
             var name = document.createTextNode(groups[i].name);
-            console.log(groups[i].users.length)
             var numberOfUsers = document.createTextNode(groups[i].users.length);
-            var deleteButton = document.createElement('BUTTON');
-            deleteButton.innerHTML = "Delete";
+            var joinButton = document.createElement('BUTTON');
+            joinButton.innerHTML = "Join";
             td1.appendChild(name);
             td2.appendChild(numberOfUsers)
             tr1.appendChild(td1)
             tr1.appendChild(td2)
-            tr1.appendChild(deleteButton)
+            tr1.appendChild(joinButton)
             tbody.appendChild(tr1);
         }
     }
