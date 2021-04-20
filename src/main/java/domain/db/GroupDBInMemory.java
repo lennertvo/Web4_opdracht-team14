@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GroupDBInMemory {
     ArrayList<Group> groups;
@@ -58,8 +59,15 @@ public class GroupDBInMemory {
         return groups;
     }
 
-    public void addUserToGroup(Group group, User user){
-        group.addUser(user.getFirstName());
+    public ArrayList<Group> getGroupsOfUser(User user) {
+        String userID = user.getUserid();
+        ArrayList<Group> result = new ArrayList<>();
+        for (Group group : groups) {
+            if (group.containsUserWithID(userID)) {
+                result.add(group);
+            }
+        }
+        return result;
     }
 
     public ArrayList<Group> getGroupsWithMaxUsers(int max) {

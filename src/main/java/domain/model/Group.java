@@ -1,10 +1,13 @@
 package domain.model;
 
+import domain.db.UserDBInMemory;
+
 import java.util.ArrayList;
 
 public class Group {
     private String name;
-    private ArrayList<String> users;
+    private ArrayList<User> users;
+    private UserDBInMemory userDBInMemory = new UserDBInMemory();
 
     public Group(String name) {
         users = new ArrayList<>();
@@ -19,15 +22,16 @@ public class Group {
         this.name = name;
     }
 
-    public ArrayList<String> getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
-    public void setUsers(ArrayList<String> users) {
+    public void setUsers(ArrayList<User> users) {
         this.users = users;
     }
 
-    public void addUser(String name){
-        this.users.add(name);
+    public void addUser(String userid){
+        User user = userDBInMemory.findUser(userid);
+        this.users.add(user);
     }
 }

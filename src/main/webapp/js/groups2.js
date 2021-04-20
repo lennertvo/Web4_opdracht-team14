@@ -24,13 +24,10 @@ function showGroups(groups) {
             var td2 = document.createElement('td');
             var name = document.createTextNode(groups[i].name);
             var numberOfUsers = document.createTextNode(groups[i].users.length);
-            var joinButton = document.createElement('BUTTON');
-            joinButton.innerHTML = "Join";
             td1.appendChild(name);
             td2.appendChild(numberOfUsers)
             tr1.appendChild(td1)
             tr1.appendChild(td2)
-            tr1.appendChild(joinButton)
             tbody.appendChild(tr1);
         }
     }
@@ -40,6 +37,8 @@ function showGroups(groups) {
             parent.removeChild(parent.firstChild);
         }
     }
+
+    setTimeout(getGroups,3000)
 
 }
 

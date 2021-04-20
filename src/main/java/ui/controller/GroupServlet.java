@@ -5,14 +5,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.db.GroupDBInMemory;
 import domain.model.Group;
+import domain.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/GroupServlet")
 public class GroupServlet extends HttpServlet {
@@ -48,7 +52,9 @@ public class GroupServlet extends HttpServlet {
                 response.getWriter().write(toJson(group));
                 break;
             case ("all"):
-                ArrayList<Group> groups = groupDBInMemory.getGroups();
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                ArrayList<Group> groups = groupDBInMemory.getGroupsOfUser(user);
                 response.setContentType("application/json");
                 response.getWriter().write(toJson(groups));
                 break;

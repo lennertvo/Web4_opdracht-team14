@@ -77,6 +77,7 @@ public class LogInServlet extends HttpServlet {
     private void createSession(User user, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
+        session.setAttribute("userid", user.getUserid());
     }
 
     private String index(HttpServletRequest request) {
