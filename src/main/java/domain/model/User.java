@@ -24,6 +24,8 @@ public class User {
 
     private Status status;
 
+    //private ArrayList<Group> groups;
+
 
     public User(String userid, String firstName, String lastName, String password, String email, String phoneNumber, LocalDate dateOfBirth){
         setUserid(userid);
@@ -35,8 +37,7 @@ public class User {
         setDateOfBirth(dateOfBirth);
         setStatus(Status.OFFLINE);
         friends = new ArrayList<>();
-
-
+        //setGroups(groups);
     }
 
     public String getUserid() {
@@ -152,4 +153,14 @@ public class User {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    /*
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
+    }
+    */
 }

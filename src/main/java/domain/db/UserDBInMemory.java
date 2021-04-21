@@ -12,12 +12,12 @@ import java.util.List;
 
 public class UserDBInMemory {
     ArrayList<User> users;
-
     public UserDBInMemory() {
         users = new ArrayList<>();
         users.add(new User("r0782485", "Lennert", "Van Oosterwyck", "123", "lennert@spookmail.com", "0412345678", LocalDate.of(2000, 4, 20)));
         users.add(new User("r0789520", "Ruben", "Bottu", "123", "ruben@spookmail.com", "0412345643", LocalDate.of(2000, 1, 30)));
-        users.add(new User("joske123", "Jos", "Vermeulen", "123", "jos@spookmail.com", "0412345678", LocalDate.of(2000, 4, 20)));
+        users.add(new User("r0795577", "Brick", "van Roekel", "123", "brick@spookmail.com", "0412345678", LocalDate.of(2000, 11, 6)));
+        users.add(new User("r0720550", "Daan", "Stallaert", "123", "daan@spookmail.com", "046942069", LocalDate.of(2000, 5, 4)));
 
     }
 
