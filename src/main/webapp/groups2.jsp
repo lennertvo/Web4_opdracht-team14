@@ -22,6 +22,7 @@
         <tr class="bg-primary">
             <th onclick="sortColumn('name')">Name</th>
             <th onclick="sortColumn('users')">Number of users</th>
+            <th>Show Members</th>
         </tr>
         </thead>
         <tbody id="groups2"></tbody>

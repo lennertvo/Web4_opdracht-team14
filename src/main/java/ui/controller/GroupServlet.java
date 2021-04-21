@@ -31,7 +31,9 @@ public class GroupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String groupName = request.getParameter("groupName");
-        groupDBInMemory.addGroup(new Group(groupName));
+        Group group = new Group(groupName);
+        groupDBInMemory.addGroup(group);
+        group.addUser((String) request.getSession().getAttribute("userid"));
     }
 
     @Override
