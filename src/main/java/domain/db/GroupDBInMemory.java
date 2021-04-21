@@ -25,20 +25,14 @@ public class GroupDBInMemory {
         groups.add(isw);
         Group UCLL = new Group("UCLL");
         groups.add(UCLL);
-        web4.addUser("Daan");
-        web4.addUser("Brick");
-        tweede.addUser("Ruben");
-        tweede.addUser("Lennert");
-        tweede.addUser("Eddy");
-        isw.addUser("Freddy");
-        UCLL.addUser("Lol");
-        UCLL.addUser("Lol");
-        UCLL.addUser("Lol");
-        UCLL.addUser("Lol");
-        UCLL.addUser("Lol");
-        UCLL.addUser("Lol");
-        UCLL.addUser("Lol");
-        UCLL.addUser("Lol");
+        web4.addUser("r0720550");
+        web4.addUser("r0795577");
+        tweede.addUser("r0789520");
+        tweede.addUser("r0782485");
+        isw.addUser("r0789520");
+        UCLL.addUser("r0782485");
+        UCLL.addUser("r0795577");
+
     }
 
     public void addGroup(Group group) {
@@ -130,4 +124,5 @@ public class GroupDBInMemory {
             return groups;
         }
     }
+
 }

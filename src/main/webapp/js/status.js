@@ -38,12 +38,6 @@ function showStatus(data) {
 
 }
 
-
-
-
-
-
-
 let button = document.getElementById("changeStatus");
 button.onclick = changeStatus
 

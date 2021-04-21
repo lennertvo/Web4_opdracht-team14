@@ -41,9 +41,6 @@ $(document).ready(
 
 )
 
-
-
-
 let addFriendButton = document.getElementById("addFriend")
 addFriendButton.onclick = addFriend;
 

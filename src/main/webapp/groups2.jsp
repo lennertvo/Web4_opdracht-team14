@@ -28,6 +28,7 @@
         <tbody id="groups2"></tbody>
     </table>
 </div>
+<script type="text/javascript" src ="js/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="js/groups2.js"></script>
 </body>
 </html>

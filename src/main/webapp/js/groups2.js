@@ -1,5 +1,10 @@
-window.onload = getGroups;
-
+$(document).ready(
+    function getYourGroups(){
+        $.get("GroupServlet?command=all", function (data){
+            showGroups(data)
+        })
+    }
+)
 function getGroups() {
     fetch("GroupServlet?command=all").then(r => r.json()).then(data => showGroups(data));
 }
@@ -15,7 +20,6 @@ function showGroups(groups) {
         removeAllChildNodes(tbody)
         createTable(groups)
     }
-    setTimeout(getGroups,10000)
 
     function createTable(groups) {
         for (var i = 0; i < groups.length; i++) {
@@ -31,6 +35,7 @@ function showGroups(groups) {
             td1.id = groups[i].name
             td1.appendChild(name)
             td2.appendChild(numberOfUsers)
+            td3.appendChild(chatButton)
             tr1.appendChild(td1)
             tr1.appendChild(td2)
             tr1.appendChild(td3)
@@ -46,6 +51,8 @@ function showGroups(groups) {
 
     setTimeout(getGroups,10000)
 }
+
+//let chatButton = document.getElementById("")
 
 let addButton = document.getElementById("newGroupButton2");
 addButton.onclick = addGroup;
@@ -72,8 +79,6 @@ function addGroup() {
     console.log("lol")
     alert("lol")
 });*/
-
-
 
 
 // individuele functionaliteit met fetch van Daan Stallaert
@@ -137,6 +142,7 @@ function executeSearchGroup(groups,groupname){
         }
     }
 }
+//end individuele opdracht
 
 
 
