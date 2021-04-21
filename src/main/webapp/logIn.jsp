@@ -39,6 +39,7 @@
                 <tr class="bg-primary">
                     <th>Friend</th>
                     <th>Status</th>
+                    <th>Chat</th>
                 </tr>
                 </thead>
                 <tbody id="friends"></tbody>

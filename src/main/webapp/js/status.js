@@ -16,7 +16,7 @@ function showStatus(data) {
         createStatus(data)
     }
 
-    setTimeout(getStatus, 1);
+    setTimeout(getStatus, 10000);
 
 
     function createStatus(data){

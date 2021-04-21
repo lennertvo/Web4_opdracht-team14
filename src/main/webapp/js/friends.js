@@ -9,8 +9,12 @@ $(document).ready(
                 var newTr = $('<tr />');
                 var newTd = $('<td id="friendName" />').text(data[i].firstName + " " + data[i].lastName);
                 var nTd = $('<td />').text(data[i].status);
+                var chatButton = document.createElement("BUTTON");
+                chatButton.innerHTML = "Chat"
+                chatButton.id = data[i].firstName+"Chat";
                 newTr.append(newTd);
                 newTr.append(nTd);
+                newTr.append(chatButton);
                 $('#friends').append(newTr);
 
             }
