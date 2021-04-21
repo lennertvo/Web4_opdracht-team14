@@ -34,4 +34,13 @@ public class Group {
         User user = userDBInMemory.findUser(userid);
         this.users.add(user);
     }
+
+    public boolean containsUserWithID(String userID) {
+        for (User user : getUsers()) {
+            if (user.getUserid().equals(userID)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
