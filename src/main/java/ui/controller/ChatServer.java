@@ -3,7 +3,10 @@ package ui.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.model.Group;
+import domain.model.Message;
 import domain.model.User;
+import domain.db.GroupDBInMemory;
+
 
 
 import javax.servlet.ServletException;
@@ -22,6 +25,7 @@ import java.util.Set;
 
 @ServerEndpoint("/ChatServer")
 public class ChatServer extends HttpServlet {
+    private GroupDBInMemory groupDBInMemory;
 
     public ChatServer(){
         super();
@@ -36,7 +40,30 @@ public class ChatServer extends HttpServlet {
                 String username = user.getFirstName()+" "+user.getLastName();
                 response.getWriter().write(username);
                 break;
+            case "getGroupMessages":
+                ArrayList<String> messages = (ArrayList<String>) request.getSession().getAttribute("messages");
+                response.setContentType("application/json");
+                response.getWriter().write(toJSON(messages));
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String command = request.getParameter("command");
+        switch (command){
+            case "putGroupMessages":
+                String name = request.getParameter("name");
+                Group requestedGroup = groupDBInMemory.getGroupByName(name);
+                ArrayList<String> messages = requestedGroup.getMessages();
+                request.getSession().setAttribute("group",requestedGroup);
+                request.getSession().setAttribute("messages",messages);
+                break;
+        }
+    }
+
+    private String toJSON(ArrayList<String> messages) throws JsonProcessingException{
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(messages);
     }
 
     private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
@@ -56,4 +83,6 @@ public class ChatServer extends HttpServlet {
             }
         }
     }
+
+
 }

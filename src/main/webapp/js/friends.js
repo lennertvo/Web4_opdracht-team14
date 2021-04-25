@@ -57,14 +57,6 @@ function addFriend() {
 
 }
 
-$("#friendName").click(
-    function openChat() {
-        let newInput = document.createElement("input")
-        newInput.type = "text"
-        newInput.placeholder = "Enter message here"
-        $("chatBox").append(newInput)
 
-    }
-)
 
 

@@ -38,9 +38,15 @@ function showGroups(groups) {
             var chatButton = document.createElement("BUTTON");
             var infoButton = document.createElement("BUTTON");
             chatButton.innerHTML = "Chat"
-            chatButton.id = groups[i].name+"Chat";
+            chatButton.id = groups[i].name;
             $(chatButton).on('click',function (){
-                location.href = "http://localhost:8080/chat.jsp"
+                $.ajax({
+                    type: "POST",
+                    url: "ChatServer?command=putGroupMessages",
+                    data: {"name":chatButton.id}
+                }).done(
+                    location.href = "http://localhost:8080/chat.jsp"
+                )
             });
             infoButton.innerHTML = "Show info";
             infoButton.className = "show_info_button"
@@ -89,10 +95,6 @@ function showGroups(groups) {
     setTimeout(getGroups,10000)
 }
 
-
-
-//let chatButton = document.getElementById("")
-
 let addButton = document.getElementById("newGroupButton2");
 addButton.onclick = addGroup;
 
@@ -106,18 +108,6 @@ function addGroup() {
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
         body: information})
 }
-
-/*$("newGroupButton2").click(function(){
-    $.ajax({
-        type: "POST",
-        url: "GroupServlet?groupName" + document.getElementById("newgroup2").value,
-    })
-})*/
-
-/*$("UCLL").addEventListener("click", function(){
-    console.log("lol")
-    alert("lol")
-});*/
 
 
 // individuele functionaliteit met fetch van Daan Stallaert

@@ -25,13 +25,19 @@ public class GroupDBInMemory {
         groups.add(isw);
         Group UCLL = new Group("UCLL");
         groups.add(UCLL);
+
         web4.addUser("r0720550");
         web4.addUser("r0795577");
+        web4.addMessage("Dit is de chatroom van web 4");
+
         tweede.addUser("r0789520");
         tweede.addUser("r0782485");
+
         isw.addUser("r0789520");
+
         UCLL.addUser("r0782485");
         UCLL.addUser("r0795577");
+        UCLL.addMessage("Dit is de chatroom van UCLL");
 
     }
 
@@ -72,6 +78,15 @@ public class GroupDBInMemory {
             }
         }
         return groupWithMax;
+    }
+
+    public Group getGroupByName(String name){
+        for(Group g: this.groups){
+            if(g.getName().equals(name)){
+                return g;
+            }
+        }
+        throw new IllegalArgumentException("No groups found");
     }
 
     public ArrayList<Group> searchGroup(String name){

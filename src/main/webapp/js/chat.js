@@ -6,6 +6,13 @@ sendButton.onclick = sendMessage;
 function openSocket(){
     ws = new WebSocket("ws://localhost:8080/ChatServer")
 
+
+    $.get("ChatServer?command=getGroupMessages",function (data){
+        for(let i=0;i<data.length;i++){
+            document.getElementById("chatBody").innerHTML += "</br><label>"+data[i]+ "</label>";
+        }
+    })
+
     ws.onopen = function (event){
         writeResponse("Joined the chatroom!");
     }
@@ -23,7 +30,6 @@ function openSocket(){
 function sendMessage(){
     var message = document.getElementById("message").value
     ws.send(message)
-    //fetch("ChatServer?command=getUser").then(r => r.json()).then(data => ws.send(data+":"+message));
 }
 
 function writeResponse(text) {

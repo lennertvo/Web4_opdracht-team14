@@ -16,5 +16,7 @@
     </div>
 </div>
 <script type="text/javascript" src="js/chat.js"></script>
+<script type="text/javascript" src ="js/jquery-3.6.0.js"></script>
+
 </body>
 </html>
