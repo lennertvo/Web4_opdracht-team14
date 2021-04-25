@@ -40,14 +40,15 @@ function showGroups(groups) {
             chatButton.innerHTML = "Chat"
             chatButton.id = groups[i].name;
             $(chatButton).on('click',function (){
+                console.log(chatButton.id)
                 $.ajax({
                     type: "POST",
-                    url: "ChatServer?command=putGroupMessages",
+                    url: "GroupServlet?command=putGroupMessages",
                     data: {"name":chatButton.id}
                 }).done(
                     location.href = "http://localhost:8080/chat.jsp"
                 )
-            });
+            })
             infoButton.innerHTML = "Show info";
             infoButton.className = "show_info_button"
             infoButton.id = i;

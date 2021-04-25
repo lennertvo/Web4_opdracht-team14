@@ -30,10 +30,23 @@ public class GroupServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String groupName = request.getParameter("groupName");
-        Group group = new Group(groupName);
-        groupDBInMemory.addGroup(group);
-        group.addUser((String) request.getSession().getAttribute("userid"));
+        String command = request.getParameter("command");
+        switch (command) {
+            case "putGroupMessages":
+                String name = request.getParameter("name");
+                System.out.println(name);
+                Group requestedGroup = groupDBInMemory.getGroupByName(name);
+                ArrayList<String> messages = requestedGroup.getMessages();
+                request.getSession().setAttribute("group", requestedGroup);
+                request.getSession().setAttribute("messages", messages);
+                break;
+            case "add":
+                String groupName = request.getParameter("groupName");
+                Group group = new Group(groupName);
+                groupDBInMemory.addGroup(group);
+                group.addUser((String) request.getSession().getAttribute("userid"));
+                break;
+        }
     }
 
     @Override
@@ -67,8 +80,18 @@ public class GroupServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().write(toJson(sortedGroups));
                 break;
+            case "getGroupMessages":
+                ArrayList<String> messages = (ArrayList<String>) request.getSession().getAttribute("messages");
+                response.setContentType("application/json");
+                response.getWriter().write(toJSON(messages));
+                break;
         }
 
+    }
+
+    private String toJSON(ArrayList<String> messages) throws JsonProcessingException  {
+        ObjectMapper o = new ObjectMapper();
+        return o.writeValueAsString(messages);
     }
 
     private String toJson(ArrayList<Group> groups) throws JsonProcessingException {

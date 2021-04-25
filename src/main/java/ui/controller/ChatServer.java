@@ -49,40 +49,5 @@ public class ChatServer extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String command = request.getParameter("command");
-        switch (command){
-            case "getUser":
-                User user = (User) request.getSession().getAttribute("user");
-                String username = user.getFirstName()+" "+user.getLastName();
-                response.getWriter().write(username);
-                break;
-            case "getGroupMessages":
-                ArrayList<String> messages = (ArrayList<String>) request.getSession().getAttribute("messages");
-                response.setContentType("application/json");
-                response.getWriter().write(toJSON(messages));
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String command = request.getParameter("command");
-        switch (command){
-            case "putGroupMessages":
-                String name = request.getParameter("name");
-                Group requestedGroup = groupDBInMemory.getGroupByName(name);
-                ArrayList<String> messages = requestedGroup.getMessages();
-                request.getSession().setAttribute("group",requestedGroup);
-                request.getSession().setAttribute("messages",messages);
-                break;
-        }
-    }
-
-    private String toJSON(ArrayList<String> messages) throws JsonProcessingException{
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(messages);
-    }
-
 
 }
