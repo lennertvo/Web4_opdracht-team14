@@ -22,7 +22,7 @@
         <tr class="bg-primary">
             <th onclick="sortColumn('name')">Name</th>
             <th onclick="sortColumn('users')">Number of users</th>
-            <th><a href="chat.jsp" style="color: black">Chat</a></th>
+            <th>Chat</th>
             <th>Show info</th>
         </tr>
         </thead>

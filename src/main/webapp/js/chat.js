@@ -19,6 +19,7 @@ function openSocket(){
     }
 }
 
+
 function sendMessage(){
     var message = document.getElementById("message").value
     ws.send(message)
@@ -26,10 +27,6 @@ function sendMessage(){
 }
 
 function writeResponse(text) {
-    //let parts = text.split(":");
-    //let user = parts[0];
-    //let message = parts[1];
-    //document.getElementById("chatBody").innerHTML += "<article id='" + user + "'></article>";
     document.getElementById("chatBody").innerHTML += "</br><label>"+text+ "</label>";
 }
 

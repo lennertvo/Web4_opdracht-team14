@@ -11,6 +11,7 @@
             <li class="nav-item"><a class="nav-link" href="blog.jsp">Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="grocerylist.jsp">Grocery list</a></li>
         </ul>
+        <h1>SPOOKBOOK</h1>
     </nav>
-    <h1>${param.title}</h1>
+    <h2>${param.title}</h2>
 </header>

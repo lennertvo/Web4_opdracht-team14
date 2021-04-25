@@ -1,6 +1,10 @@
-window.onload = getGroups;
-
-
+$(document).ready(
+    function getYourGroups(){
+        $.get("GroupServlet?command=all", function (data){
+            showGroups(data)
+        })
+    }
+)
 function getGroups() {
     fetch("GroupServlet?command=all").then(r => r.json()).then(data => showGroups(data));
 }
@@ -16,26 +20,65 @@ function showGroups(groups) {
         removeAllChildNodes(tbody)
         createTable(groups)
     }
-    setTimeout(getGroups,10000)
 
     function createTable(groups) {
         for (var i = 0; i < groups.length; i++) {
+            //make row and columns for each group
             var tr1 = document.createElement('tr');
+            tr1.className = "group_rows"
+
             var td1 = document.createElement('td');
             var td2 = document.createElement('td');
+            var td3 = document.createElement('td');
+            var td4 = document.createElement('td');
             var name = document.createTextNode(groups[i].name);
-            console.log(groups[i].users.length)
             var numberOfUsers = document.createTextNode(groups[i].users.length);
-            var deleteButton = document.createElement('BUTTON');
-            deleteButton.innerHTML = "Delete";
-            td1.appendChild(name);
+
+            //make chat and info buttons
+            var chatButton = document.createElement("BUTTON");
+            var infoButton = document.createElement("BUTTON");
+            chatButton.innerHTML = "Chat"
+            chatButton.id = groups[i].name+"Chat";
+            $(chatButton).on('click',function (){
+                location.href = "http://localhost:8080/chat.jsp"
+            });
+            infoButton.innerHTML = "Show info";
+            infoButton.className = "show_info_button"
+            infoButton.id = i;
+
+            //add columns and row to table
+            td1.appendChild(name)
             td2.appendChild(numberOfUsers)
+            td3.appendChild(chatButton)
+            td4.appendChild(infoButton)
             tr1.appendChild(td1)
             tr1.appendChild(td2)
-            tr1.appendChild(deleteButton)
+            tr1.appendChild(td3)
+            tr1.appendChild(td4)
+
+            //Deelopdracht 2b Brick van Roekel
+            var hiddenRow = document.createElement('tr');
+            hiddenRow.id = i + "_info";
+            hiddenRow.style.display = 'none';
+            var infoTd = document.createElement('td');
+            infoTd.innerHTML = groups[infoButton.id].name+": <br>"+"Number of users: "+groups[infoButton.id].users.length
+            $(infoButton).on('click',createClickHandler(infoButton.id+"_info"));
+            //end
+
+            hiddenRow.appendChild(infoTd)
             tbody.appendChild(tr1);
+            tbody.appendChild(hiddenRow);
         }
     }
+
+    //Deelopdracht 2b Brick van Roekel
+    function createClickHandler(rowId) {
+        return function (){
+            var elem = document.getElementById(rowId)
+            $(elem).toggle("slow");
+        }
+    }
+    //end
 
     function removeAllChildNodes(parent) {
         while (parent.firstChild) {
@@ -43,7 +86,12 @@ function showGroups(groups) {
         }
     }
 
+    setTimeout(getGroups,10000)
 }
+
+
+
+//let chatButton = document.getElementById("")
 
 let addButton = document.getElementById("newGroupButton2");
 addButton.onclick = addGroup;
@@ -59,7 +107,17 @@ function addGroup() {
         body: information})
 }
 
+/*$("newGroupButton2").click(function(){
+    $.ajax({
+        type: "POST",
+        url: "GroupServlet?groupName" + document.getElementById("newgroup2").value,
+    })
+})*/
 
+/*$("UCLL").addEventListener("click", function(){
+    console.log("lol")
+    alert("lol")
+});*/
 
 
 // individuele functionaliteit met fetch van Daan Stallaert
@@ -123,6 +181,7 @@ function executeSearchGroup(groups,groupname){
         }
     }
 }
+//end individuele opdracht
 
 
 

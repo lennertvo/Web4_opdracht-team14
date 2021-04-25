@@ -39,6 +39,9 @@ function showGroups(groups) {
             var infoButton = document.createElement("BUTTON");
             chatButton.innerHTML = "Chat"
             chatButton.id = groups[i].name+"Chat";
+            $(chatButton).on('click',function (){
+                location.href = "http://localhost:8080/chat.jsp"
+            });
             infoButton.innerHTML = "Show info";
             infoButton.className = "show_info_button"
             infoButton.id = i;
@@ -53,31 +56,29 @@ function showGroups(groups) {
             tr1.appendChild(td3)
             tr1.appendChild(td4)
 
-            //make hidden row with group info
+            //Deelopdracht 2b Brick van Roekel
             var hiddenRow = document.createElement('tr');
             hiddenRow.id = i + "_info";
-            var newTd = document.createElement('td');
-            newTd.innerHTML = groups[infoButton.id].name+": <br>"+"Number of users: "+groups[infoButton.id].users.length
-
             hiddenRow.style.display = 'none';
-            infoButton.addEventListener("click",createClickHandler(infoButton.id+"_info"));
-            hiddenRow.appendChild(newTd)
+            var infoTd = document.createElement('td');
+            infoTd.innerHTML = groups[infoButton.id].name+": <br>"+"Number of users: "+groups[infoButton.id].users.length
+            $(infoButton).on('click',createClickHandler(infoButton.id+"_info"));
+            //end
+
+            hiddenRow.appendChild(infoTd)
             tbody.appendChild(tr1);
             tbody.appendChild(hiddenRow);
         }
     }
 
+    //Deelopdracht 2b Brick van Roekel
     function createClickHandler(rowId) {
         return function (){
-            var info = document.getElementById(rowId)
-            if (info.style.display === '') {
-                info.style.display = 'none';
-            }
-            else {
-                info.style.display = '';
-            }
+            var elem = document.getElementById(rowId)
+            $(elem).toggle("slow");
         }
     }
+    //end
 
     function removeAllChildNodes(parent) {
         while (parent.firstChild) {
