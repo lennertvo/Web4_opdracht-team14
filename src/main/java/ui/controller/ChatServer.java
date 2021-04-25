@@ -31,6 +31,24 @@ public class ChatServer extends HttpServlet {
         super();
     }
 
+    private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
+
+    @OnOpen
+    public void onOpen(Session session){
+        sessions.add(session);
+    }
+
+    @OnMessage
+    public void onMessage(String message, Session session) {
+        for(Session s: sessions) {
+            try {
+                s.getBasicRemote().sendText(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
@@ -64,24 +82,6 @@ public class ChatServer extends HttpServlet {
     private String toJSON(ArrayList<String> messages) throws JsonProcessingException{
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(messages);
-    }
-
-    private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
-
-    @OnOpen
-    public void onOpen(Session session){
-        sessions.add(session);
-    }
-
-    @OnMessage
-    public void onMessage(String message, Session session) {
-        for(Session s: sessions) {
-            try {
-                s.getBasicRemote().sendText(message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 
