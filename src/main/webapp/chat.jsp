@@ -9,9 +9,11 @@
 <jsp:include page="header.jsp">
     <jsp:param name="title" value="Chat"/>
 </jsp:include>
-<label for="message">Message</label><input type="text" id="message">
-<input type="button" id="sendButton" value="Send">
-<div id="chatBody" class="m-3">
+<div class="m-3">
+    <label for="message">Message: </label><input type="text" id="message">
+    <input type="button" id="sendButton" value="Send">
+    <div id="chatBody" class="m-3">
+    </div>
 </div>
 <script type="text/javascript" src="js/chat.js"></script>
 </body>

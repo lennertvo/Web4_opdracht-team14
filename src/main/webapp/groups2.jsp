@@ -17,12 +17,13 @@
     <br>
     <input type="text" id="search2" placeholder="Search..."><input type="button" id="searchGroupButton2" value="Search group">
     <br>
-    <table class="table table-striped">
+    <table class="table table-striped" id="groups_table">
         <thead>
         <tr class="bg-primary">
             <th onclick="sortColumn('name')">Name</th>
             <th onclick="sortColumn('users')">Number of users</th>
             <th><a href="chat.jsp" style="color: black">Chat</a></th>
+            <th>Show info</th>
         </tr>
         </thead>
         <tbody id="groups2"></tbody>

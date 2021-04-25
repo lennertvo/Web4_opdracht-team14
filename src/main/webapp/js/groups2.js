@@ -23,23 +23,59 @@ function showGroups(groups) {
 
     function createTable(groups) {
         for (var i = 0; i < groups.length; i++) {
+            //make row and columns for each group
             var tr1 = document.createElement('tr');
+            tr1.className = "group_rows"
+
             var td1 = document.createElement('td');
             var td2 = document.createElement('td');
             var td3 = document.createElement('td');
+            var td4 = document.createElement('td');
             var name = document.createTextNode(groups[i].name);
             var numberOfUsers = document.createTextNode(groups[i].users.length);
+
+            //make chat and info buttons
             var chatButton = document.createElement("BUTTON");
+            var infoButton = document.createElement("BUTTON");
             chatButton.innerHTML = "Chat"
             chatButton.id = groups[i].name+"Chat";
-            td1.id = groups[i].name
+            infoButton.innerHTML = "Show info";
+            infoButton.className = "show_info_button"
+            infoButton.id = i;
+
+            //add columns and row to table
             td1.appendChild(name)
             td2.appendChild(numberOfUsers)
             td3.appendChild(chatButton)
+            td4.appendChild(infoButton)
             tr1.appendChild(td1)
             tr1.appendChild(td2)
             tr1.appendChild(td3)
+            tr1.appendChild(td4)
+
+            //make hidden row with group info
+            var hiddenRow = document.createElement('tr');
+            hiddenRow.id = i + "_info";
+            var newTd = document.createElement('td');
+            newTd.innerHTML = groups[infoButton.id].name+": <br>"+"Number of users: "+groups[infoButton.id].users.length
+
+            hiddenRow.style.display = 'none';
+            infoButton.addEventListener("click",createClickHandler(infoButton.id+"_info"));
+            hiddenRow.appendChild(newTd)
             tbody.appendChild(tr1);
+            tbody.appendChild(hiddenRow);
+        }
+    }
+
+    function createClickHandler(rowId) {
+        return function (){
+            var info = document.getElementById(rowId)
+            if (info.style.display === '') {
+                info.style.display = 'none';
+            }
+            else {
+                info.style.display = '';
+            }
         }
     }
 
@@ -51,6 +87,8 @@ function showGroups(groups) {
 
     setTimeout(getGroups,10000)
 }
+
+
 
 //let chatButton = document.getElementById("")
 
