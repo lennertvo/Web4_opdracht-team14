@@ -24,6 +24,9 @@ public class User {
 
     private Status status;
 
+
+
+
     //private ArrayList<Group> groups;
 
 
@@ -153,6 +156,8 @@ public class User {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+
 
     /*
     public ArrayList<Group> getGroups() {

@@ -52,7 +52,7 @@
 
 
         </select>
-            <div class="container" id="chatBox"></div>
+
         </c:when>
         <c:otherwise>
             <form method="post" action="LogInServlet?command=logIn">
@@ -63,6 +63,15 @@
         </c:otherwise>
     </c:choose>
 </div>
+<br>
+<br>
+<br>
+<br>
+
+<div id="chat"></div>
+
+<div id="chatBox"></div>
+
 
 
 <script type="text/javascript" src="js/status.js"></script>

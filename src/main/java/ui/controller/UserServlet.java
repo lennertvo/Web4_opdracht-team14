@@ -4,7 +4,9 @@ package ui.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import domain.db.FriendShipMessagesInMemory;
 import domain.db.UserDBInMemory;
+import domain.model.FriendShip;
 import domain.model.Status;
 import domain.model.User;
 
@@ -25,52 +27,73 @@ public class UserServlet extends HttpServlet {
 
     private UserDBInMemory userDBInMemory;
 
+    private FriendShipMessagesInMemory friendShipMessagesInMemory;
+
 
     public UserServlet() {
         super();
         userDBInMemory = new UserDBInMemory();
+        friendShipMessagesInMemory = new FriendShipMessagesInMemory();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
         System.out.println(command);
-        switch (command){
+        switch (command) {
             case ("changeStatus"):
                 String status = request.getParameter("status");
                 System.out.println(status);
                 User u = (User) request.getSession().getAttribute("user");
                 System.out.println(u);
-                if(status.startsWith("T")){
+                if (status.startsWith("T")) {
                     Status s = Status.TAKING_A_CLASS;
                     u.setStatus(s);
+                    userDBInMemory.setStatus(u, s);
 
-                }
-                else{
+                } else {
                     Status s = Status.valueOf(status.toUpperCase().trim());
                     u.setStatus(s);
+                    userDBInMemory.setStatus(u, s);
 
 
                 }
-
 
 
                 request.setAttribute("status", u.getStatus());
 
 
-
                 break;
             case ("addFriend"):
-                System.out.println("hahahahahah");
                 String id = request.getParameter("userid");
                 User friend = userDBInMemory.findUser(id);
                 System.out.println("het geraakt hier");
                 User a = (User) request.getSession().getAttribute("user");
-                System.out.println(a);
-                a.addFriend(friend);
-                System.out.println(friend);
-
+                if (!userDBInMemory.isAlreadyFriend(a, friend)) {
+                    a.addFriend(friend);
+                    FriendShip f = new FriendShip(a.getFirstName() + friend.getFirstName(), a, friend);
+                    friendShipMessagesInMemory.addFriendShip(f);
+                } else {
+                    System.out.println("Is already a friend");
+                }
                 break;
+            case ("addMessage"):
+                String mes = request.getParameter("message");
+                System.out.println(mes);
+                String user2id = request.getParameter("user2id");
+                System.out.println(user2id);
+                User user2 = userDBInMemory.findUser(user2id);
+                System.out.println(user2);
+                User user1 = (User) request.getSession().getAttribute("user");
+                String message = user1.getFirstName() + ": " + mes;
+                //System.out.println(message);
+                System.out.println("dit dan wel");
+                FriendShip friendShip = friendShipMessagesInMemory.getFriendShip(user1.getFirstName()+user2.getFirstName(), user2.getFirstName() + user1.getFirstName());
+                System.out.println("jaja dit werkt");
+                friendShip.addMessage(message);
+                //friendShipMessagesInMemory.addMessage(user1.getFirstName()+user2.getFirstName(), user2.getFirstName() + user1.getFirstName(), message);
+                System.out.println(friendShipMessagesInMemory.getMessagesBetween2Users(user1.getFirstName() + user2.getFirstName(), user2.getFirstName() + user1.getFirstName()));
+                System.out.println("jajajjajaja");
             default:
                 String userid = request.getParameter("userid");
                 String firstname = request.getParameter("firstname");
@@ -103,7 +126,7 @@ public class UserServlet extends HttpServlet {
         String command = request.getParameter("command");
 
 
-        switch (command){
+        switch (command) {
             case ("searchUser"):
                 String firstName = request.getParameter("firstName");
                 ArrayList<User> users = userDBInMemory.findUsers(firstName);
@@ -126,13 +149,23 @@ public class UserServlet extends HttpServlet {
                 break;
 
 
-            case("getPotentialFriends"):
+            case ("getPotentialFriends"):
                 User b = (User) request.getSession().getAttribute("user");
                 ArrayList<User> f = userDBInMemory.getPotentialFriends(b.getUserid());
                 response.setContentType("application/json");
                 System.out.println(f);
                 response.getWriter().write(toJSON(f));
                 break;
+            case ("getMessagesBetweenFriends"):
+                System.out.println("zorooo");
+                User user1 = (User) request.getSession().getAttribute("user");
+                String id = request.getParameter("user2id");
+                System.out.println(id);
+                System.out.println("zzzzzzzzzzzzz");
+                User user2 = userDBInMemory.findUser(id);
+                ArrayList<String> messages = friendShipMessagesInMemory.getMessagesBetween2Users(user1.getFirstName() + user2.getFirstName(), user2.getFirstName()+user1.getFirstName());
+                System.out.println(messages);
+                response.getWriter().write(toJson(messages));
             default:
                 ArrayList<User> us = userDBInMemory.getUsers();
                 response.setContentType("application/json");
@@ -147,19 +180,21 @@ public class UserServlet extends HttpServlet {
         return mapper.writeValueAsString(users);
     }
 
-    private String toJson(Status status) throws JsonProcessingException{
+    private String toJson(Status status) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(status);
     }
 
 
-    private String toJson(String s) throws JsonProcessingException{
+    private String toJson(String s) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(s);
     }
 
-
-
+    private String toJson(ArrayList<String> strings) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(strings);
+    }
 
 
 }

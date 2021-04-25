@@ -78,7 +78,34 @@ public class UserDBInMemory {
         }
 
 
+    public boolean isAlreadyFriend(User a, User friend) {
+        for(User f:  a.getFriends()){
+            if(f.equals(friend)){
+                return true;
+            }
+        }
+        return false;
     }
+
+
+
+    public void setStatus(User u, Status s) {
+        for(User a : users) {
+            if(a.equals(u)) {
+                a.setStatus(s);
+            }
+            for(User b: a.getFriends()){
+                if(b.equals(u)){
+                    a.getFriends().remove(b);
+                    b.setStatus(s);
+                    a.getFriends().add(b);
+                }
+            }
+
+        }
+
+    }
+}
 
 
 

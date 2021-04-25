@@ -104,7 +104,7 @@ function addGroup() {
     let groupName = document.getElementById("newgroup2").value;
     let information = "groupName=" + encodeURIComponent(groupName);
 
-    fetch("GroupServlet?", {
+    fetch("GroupServlet?command=add", {
         method: "POST",
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
         body: information})

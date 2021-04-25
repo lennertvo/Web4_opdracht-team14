@@ -1,5 +1,7 @@
 package ui.controller;
 
+import domain.model.User;
+
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -21,9 +23,10 @@ public class BlogServer {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session ) {
+    public void onMessage(String message, Session session) {
         for(Session s: sessions) {
             try {
+
                 s.getBasicRemote().sendText(message);
             }
             catch (IOException e){
