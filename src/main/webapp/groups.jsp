@@ -25,9 +25,6 @@
         <tr class="bg-primary">
             <th onclick="sortColumn('name')">Name</th>
             <th onclick="sortColumn('users')">Number of users</th>
-            <c:if test="${not empty user}">
-                <th>Join</th>
-            </c:if>
         </tr>
         </thead>
         <tbody id="groups"></tbody>

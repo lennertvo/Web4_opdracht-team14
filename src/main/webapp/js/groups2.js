@@ -2,9 +2,6 @@ $(document).ready(
     function getYourGroups(){
         $.get("GroupServlet?command=all", function (data){
             showGroups(data)
-            // Individuele opdracht Daan Stallaert - R0720550
-            $(".group_rows").hide().fadeIn(1500);
-            // end
         })
     }
 )
@@ -29,6 +26,9 @@ function showGroups(groups) {
             //make row and columns for each group
             var tr1 = document.createElement('tr');
             tr1.className = "group_rows"
+            if(i === groups.length - 1){
+                tr1.id = "new"
+            }
 
             var td1 = document.createElement('td');
             var td2 = document.createElement('td');
@@ -112,6 +112,13 @@ function addGroup() {
         method: "POST",
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
         body: information})
+
+    $.get("GroupServlet?command=all", function (data){
+        showGroups(data)
+        // Individuele opdracht Daan Stallaert - R0720550
+        $("#new").hide().fadeIn(1500)
+        // end
+    })
 }
 
 
