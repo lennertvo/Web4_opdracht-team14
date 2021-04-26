@@ -94,6 +94,7 @@ public class UserServlet extends HttpServlet {
                 //friendShipMessagesInMemory.addMessage(user1.getFirstName()+user2.getFirstName(), user2.getFirstName() + user1.getFirstName(), message);
                 System.out.println(friendShipMessagesInMemory.getMessagesBetween2Users(user1.getFirstName() + user2.getFirstName(), user2.getFirstName() + user1.getFirstName()));
                 System.out.println("jajajjajaja");
+                break;
             default:
                 String userid = request.getParameter("userid");
                 String firstname = request.getParameter("firstname");
@@ -165,7 +166,10 @@ public class UserServlet extends HttpServlet {
                 User user2 = userDBInMemory.findUser(id);
                 ArrayList<String> messages = friendShipMessagesInMemory.getMessagesBetween2Users(user1.getFirstName() + user2.getFirstName(), user2.getFirstName()+user1.getFirstName());
                 System.out.println(messages);
+                System.out.println(toJson(messages));
+                response.setContentType("application/json");
                 response.getWriter().write(toJson(messages));
+                break;
             default:
                 ArrayList<User> us = userDBInMemory.getUsers();
                 response.setContentType("application/json");

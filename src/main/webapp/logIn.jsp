@@ -65,12 +65,18 @@
 </div>
 <br>
 <br>
+<div id="chatHeader"></div>
 <br>
 <br>
-
-<div id="chat"></div>
-
+<div id="chatMessages"></div>
+<br>
+<br>
 <div id="chatBox"></div>
+
+
+<br>
+<br>
+<br>
 
 
 

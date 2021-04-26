@@ -1,8 +1,11 @@
 $(document).ready(
     function getFriends(){
-
+        $("#chatMessages").empty();
         $.get("UserServlet?command=getFriends", function (data) {
             $("#friends").empty();
+
+            let np = $('<p \>').text("hello it's me again");
+            //$("#chatMessages").append(np);
 
             for (var i = 0; i < data.length; i++) {
 
@@ -12,17 +15,19 @@ $(document).ready(
                 let chatButton = document.createElement("BUTTON");
                 chatButton.id = data[i].userid;
                 var id = data[i].userid;
-                chatButton.innerHTML = "Chat"
+                var firstname = data[i].firstName;
+                var lastname = data[i].lastName;
+                chatButton.innerHTML = "Chat";
                 chatButton.onclick = openChat;
-                //chatButton.onclick = getMessages
+
 
                 let div = document.getElementById("chat")
 
 
                 function openChat() {
-                    //$("#chatBox").empty()
-                    //setTimeout(openChat, 5000);
-                    //getMessages
+
+                    let p = document.createElement("p");
+                    p.innerText = "heLLO MY DEAR"
 
 
 
@@ -34,15 +39,18 @@ $(document).ready(
                     let b = document.createElement("BUTTON")
                     b.id = "sendMessage"
                     b.innerText = "Send"
+
                     let c = document.createElement("BUTTON")
                     c.innerText = "close"
 
 
                     $("#chatBox").append(newInput, b, c)
+                    b.onclick = sendMessage
+                    c.onclick = closeChat
+                    let h = document.createElement("H3")
+                    h.innerText = "Chat with " + firstname + " " + lastname
+                    $("#chatHeader").append(h)
 
-
-                    b.onclick = sendMessage;
-                    c.onclick = closeChat;
 
                     function sendMessage(){
                         var aSound = document.createElement('audio');
@@ -60,34 +68,50 @@ $(document).ready(
 
 
                     function closeChat() {
-                        $("#chatBox").empty()
+                        $("#chatBox").empty();
+                        $("#chatMessages").empty();
+                        $("#chatHeader").empty()
                     }
 
                 }
-                $(document).ready(function (){
+                    $.ajax({
+                        type: "Get",
+                        url: "UserServlet?command=getMessagesBetweenFriends&user2id=" + encodeURIComponent(id),
 
-                })
-                $.ajax({
-                    type: "Get",
-                    url: "UserServlet?command=getMessagesBetweenFriends&user2id=" + encodeURIComponent(id),
+                        //dataType: "JSON",
 
-                    dataType: "json",
-                    success: function (json){
-                        for(let y =  0; y < json.length; y++) {
-                            let a = document.createElement("a");
-                            let br = document.createElement("br")
-                            a.innerText = json[y];
-                            $("#chatBody").append(a, br)
+                        success: function (datajson){
+                        $("#chatMessages").empty()
 
+
+                           for(var y = 0; y < datajson.length; y++ ){
+                                let $newP = $('<p />').text(datajson[y]);
+                                let newBr = $('<br />');
+                                $("#chatMessages").append($newP);
+
+
+
+                            }
+
+
+
+
+
+
+
+
+                        },
+                        error: function (json){
+                            alert("oke this fails");
 
                         }
 
 
 
-                    }
+
+                    })
 
 
-                })
 
 
 
@@ -102,6 +126,8 @@ $(document).ready(
         })
 
     }
+
+
 
 )
 
@@ -132,10 +158,12 @@ function addFriend() {
     let userid = document.getElementById("potentialFriends").value;
     let information = "userid=" + encodeURIComponent(userid);
 
+
     fetch("UserServlet?command=addFriend", {
         method: "POST",
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
-        body: information})
+        body: information});
+    $("#chatMessages").empty();
 
 
 }
