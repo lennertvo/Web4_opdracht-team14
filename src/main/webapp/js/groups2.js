@@ -2,6 +2,9 @@ $(document).ready(
     function getYourGroups(){
         $.get("GroupServlet?command=all", function (data){
             showGroups(data)
+            // Individuele opdracht Daan Stallaert - R0720550
+            $(".group_rows").hide().fadeIn(1500);
+            // end
         })
     }
 )
@@ -95,6 +98,7 @@ function showGroups(groups) {
 
     setTimeout(getGroups,10000)
 }
+
 
 let addButton = document.getElementById("newGroupButton2");
 addButton.onclick = addGroup;
