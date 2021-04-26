@@ -23,8 +23,32 @@ $(document).ready(
 
                 let div = document.getElementById("chat")
 
+                // Deelopdracht 2b individueel - Ruben Bottu r0789520 - Kleur chat veranderen
+                function createColorButton(color, hexColorCode) {
+                    return $('<button/>')
+                        .text('Make ' + color)
+                        .click(() => $('#chatMessages').css('background-color', hexColorCode));
+                }
+                // einde individueel Ruben Bottu
 
                 function openChat() {
+                    /*let blueButton = document.createElement("BUTTON");
+                    blueButton.id = "blueButton";
+                    blueButton.innerText = "Make Blue";
+                    blueButton.onclick = function () {
+                        $("#chatMessages").css("background-color","yellow");
+                    }*/
+
+                    /*const blueButton = $('<button/>')
+                        .text('Make Blue')
+                        .click(() => $('#chatMessages').css('background-color', 'yellow'));*/
+
+                    // Deelopdracht 2b individueel - Ruben Bottu r0789520 - Kleur chat veranderen
+                    const blueButton = createColorButton('blue', '#6EE0FF');
+                    const redButton = createColorButton('red', '#FF5353');
+                    const yellowButton = createColorButton('yellow', '#FFFF00');
+                    const greenButton = createColorButton('green', '#81FF77');
+                    // einde individueel Ruben Bottu
 
                     let p = document.createElement("p");
                     p.innerText = "heLLO MY DEAR"
@@ -49,7 +73,7 @@ $(document).ready(
                     c.onclick = closeChat
                     let h = document.createElement("H3")
                     h.innerText = "Chat with " + firstname + " " + lastname
-                    $("#chatHeader").append(h)
+                    $("#chatHeader").append(h, blueButton, redButton, yellowButton, greenButton);
 
 
                     function sendMessage(){
