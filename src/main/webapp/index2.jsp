@@ -37,6 +37,7 @@
     <tbody id="users"></tbody>
 </table>
 </div>
+<script type="text/javascript" src ="js/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="js/users2.js"></script>
 </body>
 </html>

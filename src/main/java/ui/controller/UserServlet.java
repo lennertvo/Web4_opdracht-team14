@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.db.FriendShipMessagesInMemory;
 import domain.db.UserDBInMemory;
 import domain.model.FriendShip;
+import domain.model.Group;
 import domain.model.Status;
 import domain.model.User;
 
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -41,6 +43,21 @@ public class UserServlet extends HttpServlet {
         String command = request.getParameter("command");
         System.out.println(command);
         switch (command) {
+            case ("add"):
+                String userid = request.getParameter("userid");
+                String firstname = request.getParameter("firstname");
+                String lastname = request.getParameter("lastname");
+                String password = request.getParameter("password");
+                String email = request.getParameter("email");
+                String phonenumber = request.getParameter("phonenumber");
+                String dateofbirth = request.getParameter("dateofbirth");
+                System.out.println(dateofbirth);
+                System.out.println("blabla");
+                System.out.println(phonenumber);
+                LocalDate date = LocalDate.parse(dateofbirth);
+                User user = new User(userid, firstname, lastname, password, email, phonenumber, date);
+                userDBInMemory.addUser(user);
+                break;
             case ("changeStatus"):
                 String status = request.getParameter("status");
                 System.out.println(status);
@@ -59,9 +76,7 @@ public class UserServlet extends HttpServlet {
 
                 }
 
-
                 request.setAttribute("status", u.getStatus());
-
 
                 break;
             case ("addFriend"):
@@ -95,23 +110,7 @@ public class UserServlet extends HttpServlet {
                 System.out.println(friendShipMessagesInMemory.getMessagesBetween2Users(user1.getFirstName() + user2.getFirstName(), user2.getFirstName() + user1.getFirstName()));
                 System.out.println("jajajjajaja");
                 break;
-            default:
-                String userid = request.getParameter("userid");
-                String firstname = request.getParameter("firstname");
-                String lastname = request.getParameter("lastname");
-                String password = request.getParameter("password");
-                String email = request.getParameter("email");
-                String phonenumber = request.getParameter("phonenumber");
-                String dateofbirth = request.getParameter("dateofbirth");
-                System.out.println(dateofbirth);
-                System.out.println("blabla");
-                System.out.println(phonenumber);
-                LocalDate date = LocalDate.parse(dateofbirth);
-                User user = new User(userid, firstname, lastname, password, email, phonenumber, date);
-                userDBInMemory.addUser(user);
-
         }
-
     }
 
     /*@Override
@@ -126,13 +125,18 @@ public class UserServlet extends HttpServlet {
         // Deelopdracht 1a individueel - Ruben Bottu r0789520 - gebruiker zoeken op voornaam
         String command = request.getParameter("command");
 
-
         switch (command) {
+            case ("all"):
+                ArrayList<User> users = userDBInMemory.getUsers();
+                response.setContentType("application/json");
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.getWriter().write(toJSON(users));
+                break;
             case ("searchUser"):
                 String firstName = request.getParameter("firstName");
-                ArrayList<User> users = userDBInMemory.findUsers(firstName);
+                ArrayList<User> foundUsers = userDBInMemory.findUsers(firstName);
                 response.setContentType("application/json");
-                response.getWriter().write(toJSON(users));
+                response.getWriter().write(toJSON(foundUsers));
                 break;
             case ("getStatus"):
                 User u = (User) request.getSession().getAttribute("user");
@@ -148,7 +152,6 @@ public class UserServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().write(toJSON(friends));
                 break;
-
 
             case ("getPotentialFriends"):
                 User b = (User) request.getSession().getAttribute("user");
@@ -170,12 +173,6 @@ public class UserServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().write(toJson(messages));
                 break;
-            default:
-                ArrayList<User> us = userDBInMemory.getUsers();
-                response.setContentType("application/json");
-                response.getWriter().write(toJSON(us));
-
-
         }
     }
 
@@ -199,6 +196,4 @@ public class UserServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(strings);
     }
-
-
 }

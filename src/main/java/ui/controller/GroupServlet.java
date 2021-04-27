@@ -86,7 +86,6 @@ public class GroupServlet extends HttpServlet {
                 response.getWriter().write(toJSON(messages));
                 break;
         }
-
     }
 
     private String toJSON(ArrayList<String> messages) throws JsonProcessingException  {
