@@ -22,8 +22,6 @@
     <input type="email" id="email"/>
     <label for="phonenumber">Phone Number</label>
     <input type="tel" id="phonenumber"/>
-    <label for="dateofbirth">Date Of Birth</label>
-    <input type="date" id="dateofbirth" name="dateofbirth"/>
     <input type="button" id="newUserButton" value="Add user"/>
 </form>
 

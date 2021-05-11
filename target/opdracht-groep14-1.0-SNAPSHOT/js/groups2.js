@@ -6,6 +6,7 @@ $(document).ready(
 
             showGroups(data)
         })
+
     }
 )
 function getGroups() {
@@ -119,6 +120,7 @@ function showGroups(groups) {
                         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
                         body: information})
                     getMessages()
+
                 }
 
                 function closeChat() {
@@ -147,7 +149,6 @@ function showGroups(groups) {
                         }
                     })
                 }
-                setTimeout(getMessages,1000)
             }
         }
     }
@@ -166,7 +167,6 @@ function showGroups(groups) {
             parent.removeChild(parent.firstChild);
         }
     }
-
     setTimeout(getGroups,1000)
 }
 

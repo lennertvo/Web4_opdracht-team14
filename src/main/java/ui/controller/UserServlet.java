@@ -49,7 +49,7 @@ public class UserServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 String email = request.getParameter("email");
                 String phonenumber = request.getParameter("phonenumber");
-                User user = new User(userid, firstname, lastname, password, email, phonenumber);
+                User user = new User(userid, firstname, lastname, password,email, phonenumber);
                 userDBInMemory.addUser(user);
                 break;
             case ("delete"):
@@ -64,12 +64,12 @@ public class UserServlet extends HttpServlet {
                 if (status.startsWith("T")) {
                     Status s = Status.TAKING_A_CLASS;
                     u.setStatus(s);
-                    userDBInMemory.setStatus(u, s);
+
 
                 } else {
                     Status s = Status.valueOf(status.toUpperCase().trim());
                     u.setStatus(s);
-                    userDBInMemory.setStatus(u, s);
+
                 }
 
                 request.setAttribute("status", u.getStatus());
@@ -78,7 +78,6 @@ public class UserServlet extends HttpServlet {
             case ("addFriend"):
                 String id = request.getParameter("userid");
                 User friend = userDBInMemory.findUser(id);
-                System.out.println("het geraakt hier");
                 User a = (User) request.getSession().getAttribute("user");
                 if (!userDBInMemory.isAlreadyFriend(a, friend)) {
                     a.addFriend(friend);
@@ -90,21 +89,13 @@ public class UserServlet extends HttpServlet {
                 break;
             case ("addMessage"):
                 String mes = request.getParameter("message");
-                System.out.println(mes);
                 String user2id = request.getParameter("user2id");
-                System.out.println(user2id);
                 User user2 = userDBInMemory.findUser(user2id);
-                System.out.println(user2);
                 User user1 = (User) request.getSession().getAttribute("user");
                 String message = user1.getFirstName() + ": " + mes;
-                //System.out.println(message);
-                System.out.println("dit dan wel");
                 FriendShip friendShip = friendShipMessagesInMemory.getFriendShip(user1.getFirstName()+user2.getFirstName(), user2.getFirstName() + user1.getFirstName());
-                System.out.println("jaja dit werkt");
                 friendShip.addMessage(message);
                 //friendShipMessagesInMemory.addMessage(user1.getFirstName()+user2.getFirstName(), user2.getFirstName() + user1.getFirstName(), message);
-                System.out.println(friendShipMessagesInMemory.getMessagesBetween2Users(user1.getFirstName() + user2.getFirstName(), user2.getFirstName() + user1.getFirstName()));
-                System.out.println("jajajjajaja");
                 break;
         }
     }
@@ -144,8 +135,8 @@ public class UserServlet extends HttpServlet {
                 break;
             case ("getFriends"):
                 User a = (User) request.getSession().getAttribute("user");
-                ArrayList<User> friends = a.getFriends();
-
+                //ArrayList<User> friends = a.getFriends();
+                ArrayList<User> friends = userDBInMemory.getFriends(a);
                 response.setContentType("application/json");
                 response.getWriter().write(toJSON(friends));
                 break;
@@ -158,11 +149,9 @@ public class UserServlet extends HttpServlet {
                 response.getWriter().write(toJSON(f));
                 break;
             case ("getMessagesBetweenFriends"):
-                System.out.println("zorooo");
                 User user1 = (User) request.getSession().getAttribute("user");
                 String id = request.getParameter("user2id");
                 System.out.println(id);
-                System.out.println("zzzzzzzzzzzzz");
                 User user2 = userDBInMemory.findUser(id);
                 ArrayList<String> messages = friendShipMessagesInMemory.getMessagesBetween2Users(user1.getFirstName() + user2.getFirstName(), user2.getFirstName()+user1.getFirstName());
                 System.out.println(messages);

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: curre
-Build-Jdk: Azul Zulu Community™ version 13.0.6
+Built-By: lenne
+Build-Jdk: 12.0.2
 

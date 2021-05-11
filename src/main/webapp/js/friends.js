@@ -7,16 +7,16 @@ $(document).ready(
             let np = $('<p \>').text("hello it's me again");
             //$("#chatMessages").append(np);
 
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
 
                 let newTr = $('<tr />');
                 let newTd = $('<td id="friendName" />').text(data[i].firstName + " " + data[i].lastName);
                 let nTd = $('<td />').text(data[i].status);
                 let chatButton = document.createElement("BUTTON");
                 chatButton.id = data[i].userid;
-                var id = data[i].userid;
-                var firstname = data[i].firstName;
-                var lastname = data[i].lastName;
+                let id = data[i].userid;
+                let firstname = data[i].firstName;
+                let lastname = data[i].lastName;
                 chatButton.innerHTML = "Chat";
                 chatButton.onclick = openChat;
 
@@ -65,7 +65,7 @@ $(document).ready(
                         aSound.play();
                        // $.post("UserServlet?command=addMessage&message=" + newInput.textContent)
                         let information = "message=" + encodeURIComponent(newInput.value) ;
-                        fetch("UserServlet?command=addMessage&user2id="+id, {
+                        fetch("UserServlet?command=addMessage&user2id="+encodeURIComponent(id), {
                             method: "POST",
                             headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
                             body: information})

@@ -37,6 +37,18 @@ public class UserDBInMemory {
         return result;
     }
 
+    public ArrayList<User> getFriends(User u){
+        ArrayList<User> f = new ArrayList<>();
+        for(User all: users){
+            for(User friends: u.getFriends()){
+                if(all.getUserid().equals(friends.getUserid())){
+                    f.add(all);
+                }
+            }
+        }
+        return f;
+    }
+
     public User findUser(String userId) {
         for (User user : users) {
             if (user.getUserid().equals(userId)) {
