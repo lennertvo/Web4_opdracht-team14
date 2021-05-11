@@ -41,7 +41,6 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
-        System.out.println(command);
         switch (command) {
             case ("add"):
                 String userid = request.getParameter("userid");
@@ -50,13 +49,12 @@ public class UserServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 String email = request.getParameter("email");
                 String phonenumber = request.getParameter("phonenumber");
-                String dateofbirth = request.getParameter("dateofbirth");
-                System.out.println(dateofbirth);
-                System.out.println("blabla");
-                System.out.println(phonenumber);
-                LocalDate date = LocalDate.parse(dateofbirth);
-                User user = new User(userid, firstname, lastname, password, email, phonenumber, date);
+                User user = new User(userid, firstname, lastname, password, email, phonenumber);
                 userDBInMemory.addUser(user);
+                break;
+            case ("delete"):
+                String userId = request.getParameter("userid");
+                userDBInMemory.removeUser(userId);
                 break;
             case ("changeStatus"):
                 String status = request.getParameter("status");
@@ -72,8 +70,6 @@ public class UserServlet extends HttpServlet {
                     Status s = Status.valueOf(status.toUpperCase().trim());
                     u.setStatus(s);
                     userDBInMemory.setStatus(u, s);
-
-
                 }
 
                 request.setAttribute("status", u.getStatus());
@@ -133,9 +129,10 @@ public class UserServlet extends HttpServlet {
                 response.getWriter().write(toJSON(users));
                 break;
             case ("searchUser"):
-                String firstName = request.getParameter("firstName");
+                String firstName = request.getParameter("firstname");
                 ArrayList<User> foundUsers = userDBInMemory.findUsers(firstName);
                 response.setContentType("application/json");
+                response.setHeader("Access-Control-Allow-Origin", "*");
                 response.getWriter().write(toJSON(foundUsers));
                 break;
             case ("getStatus"):

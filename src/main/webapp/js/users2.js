@@ -6,6 +6,10 @@ $(document).ready(
     }
 )
 
+function getUsers() {
+    fetch("UserServlet?command=all").then(r => r.json()).then(data => showUsers(data));
+}
+
 function showUsers(users) {
     var tbody = document.getElementById("users")
 
@@ -16,7 +20,7 @@ function showUsers(users) {
         removeAllChildNodes(tbody)
         createTable(users)
     }
-    setTimeout(getUsers,10000);
+    setTimeout(getUsers,5000);
 
     function createTable(users) {
         for (var i = 0; i < users.length; i++) {
@@ -52,11 +56,9 @@ function  addUser() {
     let password = document.getElementById("password").value;
     let email = document.getElementById("email").value;
     let phonenumber = document.getElementById("phonenumber").value;
-    let dateofbirth = document.getElementById("dateofbirth").value;
     let information = "userid=" + encodeURIComponent(userid) + "&firstname=" + encodeURIComponent(firstname) +
         "&lastname=" + encodeURIComponent(lastname) + "&password=" + encodeURIComponent(password) +
-        "&email=" + encodeURIComponent(email) + "&phonenumber=" + encodeURIComponent(phonenumber) +
-        "&dateofbirth=" + encodeURIComponent(dateofbirth);
+        "&email=" + encodeURIComponent(email) + "&phonenumber=" + encodeURIComponent(phonenumber);
 
     fetch("UserServlet?command=add", {
         method: "POST",

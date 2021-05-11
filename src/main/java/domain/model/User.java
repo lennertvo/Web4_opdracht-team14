@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
@@ -18,7 +19,6 @@ public class User {
     private String password, email, phoneNumber;
 
     private Role role;
-    private LocalDate dateOfBirth;
 
     private ArrayList<User> friends;
 
@@ -30,14 +30,13 @@ public class User {
     //private ArrayList<Group> groups;
 
 
-    public User(String userid, String firstName, String lastName, String password, String email, String phoneNumber, LocalDate dateOfBirth){
+    public User(String userid, String firstName, String lastName, String password, String email, String phoneNumber){
         setUserid(userid);
         setFirstName(firstName);
         setLastName(lastName);
         setPasswordHashed(password);
         setEmail(email);
         setPhoneNumber(phoneNumber);
-        setDateOfBirth(dateOfBirth);
         setStatus(Status.OFFLINE);
         friends = new ArrayList<>();
         //setGroups(groups);
@@ -91,7 +90,7 @@ public class User {
             //reset
             crypt.reset();
             //update
-            byte[] passwordBytes = password.getBytes("UTF-8");
+            byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
             crypt.update(passwordBytes);
             //digest
             byte[] digest = crypt.digest();
@@ -99,7 +98,7 @@ public class User {
             BigInteger digestAsBigInteger = new BigInteger(1, digest);
             //return hashed password
             return digestAsBigInteger.toString(16);
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new DomainException(e.getMessage());
         }
     }
@@ -119,14 +118,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public Role getRole() {

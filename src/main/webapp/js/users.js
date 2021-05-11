@@ -60,11 +60,9 @@ function  addUser() {
     let password = document.getElementById("password").value;
     let email = document.getElementById("email").value;
     let phonenumber = document.getElementById("phonenumber").value;
-    let dateofbirth = document.getElementById("dateofbirth").value;
     let information = "userid=" + encodeURIComponent(userid) + "&firstname=" + encodeURIComponent(firstname) +
         "&lastname=" + encodeURIComponent(lastname) + "&password=" + encodeURIComponent(password) +
-        "&email=" + encodeURIComponent(email) + "&phonenumber=" + encodeURIComponent(phonenumber) +
-        "&dateofbirth=" + encodeURIComponent(dateofbirth);
+        "&email=" + encodeURIComponent(email) + "&phonenumber=" + encodeURIComponent(phonenumber);
 
     newUsersRequest.open("POST", "UserServlet", true);
     newUsersRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

@@ -96,7 +96,7 @@ function showGroups(groups) {
         }
     }
 
-    setTimeout(getGroups,10000)
+    setTimeout(getGroups,5000)
 }
 
 
