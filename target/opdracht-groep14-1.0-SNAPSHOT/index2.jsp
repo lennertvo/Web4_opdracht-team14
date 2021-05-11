@@ -9,7 +9,8 @@
     <jsp:param name="title" value="Users"/>
 </jsp:include>
 <div class="m-3">
-<form><label for="userid">User ID</label>
+<form>
+    <label for="userid">User ID</label>
     <input type="text" id="userid"/>
     <label for="firstname">First Name</label>
     <input type="text" id="firstname"/>
@@ -37,6 +38,7 @@
     <tbody id="users"></tbody>
 </table>
 </div>
+<script type="text/javascript" src ="js/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="js/users2.js"></script>
 </body>
 </html>

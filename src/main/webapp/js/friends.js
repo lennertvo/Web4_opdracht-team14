@@ -42,10 +42,6 @@ $(document).ready(
                     let p = document.createElement("p");
                     p.innerText = "heLLO MY DEAR"
 
-
-
-
-
                     let newInput = document.createElement("input")
                     newInput.type = "text"
                     newInput.placeholder = "Enter message here"
@@ -56,14 +52,12 @@ $(document).ready(
                     let c = document.createElement("BUTTON")
                     c.innerText = "close"
 
-
                     $("#chatBox").append(newInput, b, c)
                     b.onclick = sendMessage
                     c.onclick = closeChat
                     let h = document.createElement("H3")
                     h.innerText = "Chat with " + firstname + " " + lastname
                     $("#chatHeader").append(h, blueButton, redButton, yellowButton, greenButton);
-
 
                     function sendMessage(){
                         var aSound = document.createElement('audio');
@@ -75,17 +69,12 @@ $(document).ready(
                             method: "POST",
                             headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
                             body: information})
-
-
                     }
-
-
                     function closeChat() {
                         $("#chatBox").empty();
                         $("#chatMessages").empty();
                         $("#chatHeader").empty()
                     }
-
                 }
                     $.ajax({
                         type: "Get",
@@ -95,39 +84,17 @@ $(document).ready(
 
                         success: function (datajson){
                         $("#chatMessages").empty()
-
-
                            for(var y = 0; y < datajson.length; y++ ){
                                 let $newP = $('<p />').text(datajson[y]);
                                 let newBr = $('<br />');
                                 $("#chatMessages").append($newP);
-
-
-
                             }
-
-
-
-
-
-
-
-
                         },
                         error: function (json){
                             alert("oke this fails");
 
                         }
-
-
-
-
                     })
-
-
-
-
-
 
                 newTr.append(newTd);
                 newTr.append(nTd);
@@ -139,9 +106,6 @@ $(document).ready(
         })
 
     }
-
-
-
 )
 
 

@@ -32,20 +32,21 @@ public class GroupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
         switch (command) {
-            case "putGroupMessages":
-                String name = request.getParameter("name");
-                System.out.println(name);
-                Group requestedGroup = groupDBInMemory.getGroupByName(name);
-                ArrayList<String> messages = requestedGroup.getMessages();
-                request.getSession().setAttribute("group", requestedGroup);
-                request.getSession().setAttribute("messages", messages);
-                break;
             case "add":
                 String groupName = request.getParameter("groupName");
                 Group group = new Group(groupName);
                 groupDBInMemory.addGroup(group);
                 group.addUser((String) request.getSession().getAttribute("userid"));
                 break;
+            case ("addMessage"):
+                String mes = request.getParameter("message");
+                String groupname = request.getParameter("groupName");
+                Group g = groupDBInMemory.getGroupByName(groupname);
+                User user1 = (User) request.getSession().getAttribute("user");
+                String message = user1.getFirstName() + ": " + mes;
+                g.addMessage(message);
+                break;
+
         }
     }
 
@@ -81,7 +82,8 @@ public class GroupServlet extends HttpServlet {
                 response.getWriter().write(toJson(sortedGroups));
                 break;
             case "getGroupMessages":
-                ArrayList<String> messages = (ArrayList<String>) request.getSession().getAttribute("messages");
+                String name = request.getParameter("groupId");
+                ArrayList<String> messages = groupDBInMemory.getMessagesOfGroup(name);
                 response.setContentType("application/json");
                 response.getWriter().write(toJSON(messages));
                 break;

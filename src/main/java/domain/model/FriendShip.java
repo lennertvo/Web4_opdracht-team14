@@ -35,7 +35,6 @@ public class FriendShip {
         this.user1 = user1;
     }
 
-
     public ArrayList<String> getMessages() {
         return messages;
     }

@@ -1,6 +1,9 @@
 $(document).ready(
     function getYourGroups(){
+        $("#chatMessages").empty();
         $.get("GroupServlet?command=all", function (data){
+            $("#groups2").empty();
+
             showGroups(data)
         })
     }
@@ -26,6 +29,9 @@ function showGroups(groups) {
             //make row and columns for each group
             var tr1 = document.createElement('tr');
             tr1.className = "group_rows"
+            if(i === groups.length - 1){
+                tr1.id = "new"
+            }
 
             var td1 = document.createElement('td');
             var td2 = document.createElement('td');
@@ -39,16 +45,9 @@ function showGroups(groups) {
             var infoButton = document.createElement("BUTTON");
             chatButton.innerHTML = "Chat"
             chatButton.id = groups[i].name;
-            $(chatButton).on('click',function (){
-                console.log(chatButton.id)
-                $.ajax({
-                    type: "POST",
-                    url: "GroupServlet?command=putGroupMessages",
-                    data: {"name":chatButton.id}
-                }).done(
-                    location.href = "http://localhost:8080/chat.jsp"
-                )
-            })
+            var id = groups[i].name;
+            chatButton.onclick = openChat;
+
             infoButton.innerHTML = "Show info";
             infoButton.className = "show_info_button"
             infoButton.id = i;
@@ -75,6 +74,81 @@ function showGroups(groups) {
             hiddenRow.appendChild(infoTd)
             tbody.appendChild(tr1);
             tbody.appendChild(hiddenRow);
+
+            // Deelopdracht 2b individueel - Ruben Bottu r0789520 - Kleur chat veranderen
+            function createColorButton(color, hexColorCode) {
+                return $('<button/>')
+                    .text('Make ' + color)
+                    .click(() => $('#chatMessages').css('background-color', hexColorCode));
+            }
+            //end
+
+            function openChat(){
+                // Deelopdracht 2b individueel - Ruben Bottu r0789520 - Kleur chat veranderen
+                const blueButton = createColorButton('blue', '#6EE0FF');
+                const redButton = createColorButton('red', '#FF5353');
+                const yellowButton = createColorButton('yellow', '#FFFF00');
+                const greenButton = createColorButton('green', '#81FF77');
+                //end
+
+                let newInput = document.createElement("input")
+                newInput.type = "text"
+                newInput.placeholder = "Enter message here"
+                let b = document.createElement("BUTTON")
+                b.id = "sendMessage"
+                b.innerText = "Send"
+
+                let c = document.createElement("BUTTON")
+                c.innerText = "close"
+
+                $("#chatBox").append(newInput, b, c)
+                b.onclick = sendMessage
+                c.onclick = closeChat
+                let h = document.createElement("H3")
+                h.innerText = "Chat with " + id
+                $("#chatHeader").append(h, blueButton, redButton, yellowButton, greenButton);
+
+                function sendMessage(){
+                    var aSound = document.createElement('audio');
+                    aSound.setAttribute('src', '/audio/beep.wav');
+                    aSound.play();
+                    // $.post("UserServlet?command=addMessage&message=" + newInput.textContent)
+                    let information = "message=" + encodeURIComponent(newInput.value) ;
+                    fetch("GroupServlet?command=addMessage&groupName="+id, {
+                        method: "POST",
+                        headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
+                        body: information})
+                    getMessages()
+                }
+
+                function closeChat() {
+                    $("#chatBox").empty();
+                    $("#chatMessages").empty();
+                    $("#chatHeader").empty()
+                }
+
+                function getMessages(){
+                    $.ajax({
+                        type: "Get",
+                        url: "GroupServlet?command=getGroupMessages&groupId=" + encodeURIComponent(id),
+
+                        //dataType: "JSON"
+                        success: function (datajson){
+                            $("#chatMessages").empty()
+                            for(var y = 0; y < datajson.length; y++ ){
+                                let $newP = $('<p />').text(datajson[y]);
+                                let newBr = $('<br />');
+                                $("#chatMessages").append($newP);
+                            }
+                        },
+                        error: function (json){
+                            alert("oke this fails");
+
+                        }
+                    })
+                }
+                setTimeout(getMessages,1000)
+            }
         }
     }
 
@@ -93,8 +167,9 @@ function showGroups(groups) {
         }
     }
 
-    setTimeout(getGroups,10000)
+    setTimeout(getGroups,1000)
 }
+
 
 let addButton = document.getElementById("newGroupButton2");
 addButton.onclick = addGroup;
@@ -108,6 +183,13 @@ function addGroup() {
         method: "POST",
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
         body: information})
+
+    $.get("GroupServlet?command=all", function (data){
+        showGroups(data)
+        // Individuele opdracht Daan Stallaert - R0720550
+        $("#new").hide().fadeIn(1500)
+        // end
+    })
 }
 
 

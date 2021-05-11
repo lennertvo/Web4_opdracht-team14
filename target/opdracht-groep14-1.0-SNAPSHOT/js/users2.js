@@ -1,8 +1,10 @@
-window.onload = getUsers;
-
-function getUsers(){
-    fetch("UserServlet?").then(r => r.json()).then(data => showUsers(data));
-}
+$(document).ready(
+    function getUsers(){
+        $.get("UserServlet?command=all", function (data){
+            showUsers(data)
+        })
+    }
+)
 
 function showUsers(users) {
     var tbody = document.getElementById("users")
@@ -56,9 +58,12 @@ function  addUser() {
         "&email=" + encodeURIComponent(email) + "&phonenumber=" + encodeURIComponent(phonenumber) +
         "&dateofbirth=" + encodeURIComponent(dateofbirth);
 
-    fetch("UserServlet?", {
+    fetch("UserServlet?command=add", {
         method: "POST",
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
         body: information})
 
+    $.get("UserServlet?command=all", function (data){
+        showUsers(data)
+    })
 }

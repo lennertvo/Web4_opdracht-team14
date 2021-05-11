@@ -9,7 +9,8 @@
     <jsp:param name="title" value="Users"/>
 </jsp:include>
 <div class="m-3">
-<form><label for="userid">User ID</label>
+<form>
+    <label for="userid">User ID</label>
     <input type="text" id="userid"/>
     <label for="firstname">First Name</label>
     <input type="text" id="firstname"/>

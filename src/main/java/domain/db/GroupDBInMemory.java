@@ -140,4 +140,15 @@ public class GroupDBInMemory {
         }
     }
 
+    public ArrayList<String> getMessagesOfGroup(String name){
+        ArrayList<String> messages = new ArrayList<>();
+        Group group = getGroupByName(name);
+        for (Group g: groups){
+            if(g.equals(group)){
+                messages.addAll(g.getMessages());
+            }
+        }
+        return messages;
+    }
+
 }
