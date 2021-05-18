@@ -1,5 +1,5 @@
 $(document).ready(
-    function getUsers(){
+    function getYourUsers(){
         $.get("UserServlet?command=all", function (data){
             showUsers(data)
         })
@@ -20,7 +20,6 @@ function showUsers(users) {
         removeAllChildNodes(tbody)
         createTable(users)
     }
-    setTimeout(getUsers,5000);
 
     function createTable(users) {
         for (var i = 0; i < users.length; i++) {
@@ -36,7 +35,7 @@ function showUsers(users) {
             tbody.appendChild(tr1);
         }
     }
-
+    setTimeout(getUsers,1000);
 }
 
 
