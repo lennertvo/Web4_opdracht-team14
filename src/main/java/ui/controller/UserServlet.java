@@ -64,11 +64,13 @@ public class UserServlet extends HttpServlet {
                 if (status.startsWith("T")) {
                     Status s = Status.TAKING_A_CLASS;
                     u.setStatus(s);
+                    userDBInMemory.setStatusUser(u, Status.TAKING_A_CLASS);
 
 
                 } else {
                     Status s = Status.valueOf(status.toUpperCase().trim());
                     u.setStatus(s);
+                    userDBInMemory.setStatusUser(u, s);
 
                 }
 
@@ -128,7 +130,8 @@ public class UserServlet extends HttpServlet {
                 break;
             case ("getStatus"):
                 User u = (User) request.getSession().getAttribute("user");
-                Status status = u.getStatus();
+                //Status status = u.getStatus();
+                Status status = userDBInMemory.getStatusUser(u);
                 String c = status.getDescription();
                 response.setContentType("application/json");
                 response.getWriter().write(toJson(c));

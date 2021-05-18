@@ -55,6 +55,7 @@ public class LogInServlet extends HttpServlet {
     private String logOut(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         user.setStatus(Status.OFFLINE);
+        userDBInMemory.setStatusUser(user, Status.OFFLINE);
         request.getSession().invalidate();
         return "logIn.jsp";
     }
@@ -66,10 +67,11 @@ public class LogInServlet extends HttpServlet {
         User found = userDBInMemory.findUser(userId);
         if(found.isCorrectPassword(password)){
             createSession(found, request);
-            request.setAttribute("status", found.getStatus());
+            request.setAttribute("status", userDBInMemory.getStatusUser(found));
 
         }
         found.setStatus(Status.ONLINE);
+        userDBInMemory.setStatusUser(found, Status.ONLINE);
 
         return "logIn.jsp";
     }

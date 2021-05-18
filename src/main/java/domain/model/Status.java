@@ -12,7 +12,7 @@ public enum Status {
         this.description = description;
     }
 
-    Status() {}
+
 
     public String getDescription() {
         return description;

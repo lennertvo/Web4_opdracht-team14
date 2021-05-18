@@ -39,12 +39,14 @@ public class UserDBInMemory {
 
     public ArrayList<User> getFriends(User u){
         ArrayList<User> f = new ArrayList<>();
-        for(User all: users){
-            for(User friends: u.getFriends()){
-                if(all.getUserid().equals(friends.getUserid())){
+
+        for(User friend: u.getFriends()){
+            for(User all: users){
+                if(friend.getUserid().equals(all.getUserid())){
                     f.add(all);
                 }
             }
+
         }
         return f;
     }
@@ -87,6 +89,14 @@ public class UserDBInMemory {
         users.add(user);
     }
 
+    public void setStatusUser(User u, Status status) {
+        for(User a: users){
+            if(a.getUserid().equals(u.getUserid())){
+                a.setStatus(status);
+            }
+        }
+    }
+
     public boolean isAlreadyFriend(User a, User friend) {
         for(User f:  a.getFriends()){
             if(f.equals(friend)){
@@ -96,22 +106,18 @@ public class UserDBInMemory {
         return false;
     }
 
-    public void setStatus(User u, Status s) {
-        for(User a : users) {
-            if(a.equals(u)) {
-                a.setStatus(s);
-            }
-            for(User b: a.getFriends()){
-                if(b.equals(u)){
-                    a.getFriends().remove(b);
-                    b.setStatus(s);
-                    a.getFriends().add(b);
-                }
-            }
 
+    public Status getStatusUser(User u) {
+        Status s = Status.ONLINE;
+        for(User a: users){
+            if(a.getUserid().equals(u.getUserid())){
+                s = a.getStatus();
+            }
         }
-
+        return s;
     }
+
+
 }
 
 
